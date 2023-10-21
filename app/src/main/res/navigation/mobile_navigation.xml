@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_beranda"
-        android:name="com.tanum.app.ui.beranda.BerandaFragment"
+        android:name="com.tanum.app.ui.main.beranda.BerandaFragment"
         android:label="@string/title_beranda"
         tools:layout="@layout/fragment_beranda" />
 
     <fragment
         android:id="@+id/navigation_lahan_saya"
-        android:name="com.tanum.app.ui.lahan_saya.LahanSayaFragment"
+        android:name="com.tanum.app.ui.main.lahan_saya.LahanSayaFragment"
         android:label="@string/title_lahan_saya"
         tools:layout="@layout/fragment_lahan_saya" />
 
     <fragment
         android:id="@+id/navigation_artikel"
-        android:name="com.tanum.app.ui.artikel.ArtikelFragment"
+        android:name="com.tanum.app.ui.main.artikel.ArtikelFragment"
         android:label="@string/title_artikel"
         tools:layout="@layout/fragment_artikel" />
 
     <fragment
         android:id="@+id/navigation_profil"
-        android:name="com.tanum.app.ui.profil.ProfilFragment"
+        android:name="com.tanum.app.ui.main.profil.ProfilFragment"
         android:label="@string/title_profil"
         tools:layout="@layout/fragment_profil" />
 </navigation>

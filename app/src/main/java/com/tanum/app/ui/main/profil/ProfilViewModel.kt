@@ -1,4 +1,4 @@
-package com.tanum.app.ui.profil
+package com.tanum.app.ui.main.profil
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

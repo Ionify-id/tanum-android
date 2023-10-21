@@ -1,4 +1,4 @@
-package com.tanum.app.ui.lahan_saya
+package com.tanum.app.ui.main.lahan_saya
 
 import android.os.Bundle
 import android.view.LayoutInflater

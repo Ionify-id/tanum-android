@@ -1,4 +1,4 @@
-package com.tanum.app.ui.beranda
+package com.tanum.app.ui.main.artikel
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tanum.app.databinding.FragmentBerandaBinding
+import com.tanum.app.databinding.FragmentArtikelBinding
 
-class BerandaFragment : Fragment() {
+class ArtikelFragment : Fragment() {
 
-    private var _binding: FragmentBerandaBinding? = null
+    private var _binding: FragmentArtikelBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,14 +19,14 @@ class BerandaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(BerandaViewModel::class.java)
+        val notificationsViewModel =
+            ViewModelProvider(this).get(ArtikelViewModel::class.java)
 
-        _binding = FragmentBerandaBinding.inflate(inflater, container, false)
+        _binding = FragmentArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textNotifications
+        notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

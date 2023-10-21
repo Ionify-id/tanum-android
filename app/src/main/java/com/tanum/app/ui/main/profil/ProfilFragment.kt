@@ -1,4 +1,4 @@
-package com.tanum.app.ui.profil
+package com.tanum.app.ui.main.profil
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

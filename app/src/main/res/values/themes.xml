@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/green_tanum</item>
         <!-- Customize your theme here. -->
+        <item name="android:font">@font/lato_regular</item>
     </style>
 </resources>
