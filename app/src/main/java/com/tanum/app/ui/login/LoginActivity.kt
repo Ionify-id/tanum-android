@@ -25,16 +25,23 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         supportActionBar?.hide()
         setContentView(binding.root)
-
         setupSpannableString()
         setupAction()
     }
 
     private fun setupAction() {
         binding.buttonLogin.setOnClickListener{
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val email = binding.editTextEmail.text.toString()
+            val password = binding.editTextPassword.text.toString()
+            if (email.isNotEmpty() and password.isNotEmpty()) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(applicationContext,
+                    getString(R.string.login_alert), Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
@@ -44,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onClick(widget: View) {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
-                finish()
             }
 
             override fun updateDrawState(ds: TextPaint) {

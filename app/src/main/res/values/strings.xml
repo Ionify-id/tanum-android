@@ -8,7 +8,23 @@
     <string name="welcome_tanum">Selamat datang di Tanum!</string>
     <string name="silakan_masuk_untuk_memulai">Silakan masuk untuk memulai.</string>
     <string name="email_hint">Email</string>
-    <string name="password_hint">Password</string>
+    <string name="password_hint">Kata Sandi</string>
     <string name="masuk">Masuk</string>
     <string name="spannable_string_login">Belum punya akun? Daftar sekarang</string>
+    <string name="login_alert">Harap isi email dan password terlebih dahulu</string>
+    <string name="registrasi_akun">Registrasi Akun</string>
+    <string name="register_first">Untuk memulai, silakan isi data berikut untuk membuat akun.</string>
+    <string name="petani">Petani</string>
+    <string name="template_text_view">TextView</string>
+    <string name="peran">Peran</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="registrasi">Registrasi</string>
+    <string name="register_alert">Semua form wajib diisi terlebih dahulu</string>
+
+
+    <!--    String array for drop down-->
+    <string-array name="role">
+        <item>Petani</item>
+        <item>Pengepul</item>
+    </string-array>
 </resources>
