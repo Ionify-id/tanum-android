@@ -9,7 +9,8 @@
         android:id="@+id/navigation_beranda"
         android:name="com.tanum.app.ui.main.beranda.BerandaFragment"
         android:label="@string/title_beranda"
-        tools:layout="@layout/fragment_beranda" />
+        tools:layout="@layout/fragment_beranda" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_lahan_saya"

@@ -20,7 +20,13 @@
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="registrasi">Registrasi</string>
     <string name="register_alert">Semua form wajib diisi terlebih dahulu</string>
-
+    <string name="lahan_saya_null">Kamu belum memiliki lahan. Ayo tambahkan lahan untuk melakukan pencatatan aktivitas budidaya.</string>
+    <string name="tambahkan_lahan">Tambahkan Lahan</string>
+    <string name="welcome_template">Halo, Petani</string>
+    <string name="welcome_message_html">Selamat datang di &lt;b&gt;Tanum&lt;/b&gt;. Mau catat apa hari ini?</string>
+    <string name="lihat_lahan_lainnya"><![CDATA[Lihat lahan lainnya >]]></string>
+    <string name="lihat_artikel_lainnya"><![CDATA[Lihat artikel lainnya >]]></string>
+    <string name="artikel_null">Artikel belum tersedia</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

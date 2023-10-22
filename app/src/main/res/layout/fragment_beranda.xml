@@ -1,22 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.beranda.BerandaFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/tvWelcomePetani"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_template"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWelcomeBeranda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:textIsSelectable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomePetani"  />
+
+        <TextView
+            android:id="@+id/tvLahanSaya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_lahan_saya"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomeBeranda" />
+
+        <TextView
+            android:id="@+id/tvLihatLahanLainnya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="14sp"
+            android:text="@string/lihat_lahan_lainnya"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvLahanSaya"  />
+
+        <TextView
+            android:id="@+id/tvLahanSayaNullInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textAlignment="center"
+            android:text="@string/lahan_saya_null"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLahanSaya" />
+
+        <TextView
+            android:id="@+id/tvArtikel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_artikel"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLahanSayaNullInfo" />
+
+        <TextView
+            android:id="@+id/tvArtikelLainnya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="14sp"
+            android:text="@string/lihat_artikel_lainnya"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtikel"  />
+
+        <TextView
+            android:id="@+id/tvArtikelNullInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textAlignment="center"
+            android:text="@string/artikel_null"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvArtikel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

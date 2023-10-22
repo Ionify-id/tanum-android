@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        spannableString.setSpan(clickableSpan, 18, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(clickableSpan, 18, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         binding.tvRegister.apply {
             text = spannableString

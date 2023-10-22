@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        supportActionBar?.hide()
+        setSupportActionBar(binding.toolbar)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -34,5 +34,14 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
+            if (destination.id == R.id.navigation_beranda) {
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+            }
+        }
+
     }
 }
