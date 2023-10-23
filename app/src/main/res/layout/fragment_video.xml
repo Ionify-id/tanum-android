@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.artikel.video.VideoFragment">
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/rvVideo"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:paddingHorizontal="24dp"-->
+    <!--        android:paddingTop="16dp"-->
+    <!--        tools:listitem="@layout/item_video"/>-->
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars"
+        android:clickable="true"/>
+
+</ScrollView>

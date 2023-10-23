@@ -1,5 +1,6 @@
 package com.tanum.app.ui.main.artikel
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tanum.app.R
 import com.tanum.app.databinding.FragmentArtikelBinding
+import com.tanum.app.ui.main.artikel.berita.BeritaActivity
+import com.tanum.app.ui.main.artikel.video.VideoActivity
 
 class ArtikelFragment : Fragment() {
 
@@ -31,7 +34,14 @@ class ArtikelFragment : Fragment() {
     }
 
     private fun setupAction() {
-
+        binding.tvBeritaLainnya.setOnClickListener {
+            val intent = Intent(activity, BeritaActivity::class.java)
+            startActivity(intent)
+        }
+        binding.tvVideoLainnya.setOnClickListener {
+            val intent = Intent(activity, VideoActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

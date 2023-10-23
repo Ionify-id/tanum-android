@@ -34,6 +34,14 @@
     <string name="lihat_video_lainnya"><![CDATA[Lihat video lainnya >]]></string>
     <string name="video_null">Video belum tersedia</string>
     <string name="log_out">Log out</string>
+    <string name="nama_lahan">Nama Lahan</string>
+    <string name="nama_komoditas">Nama Komoditas</string>
+    <string name="nama_varietas">Nama Varietas</string>
+    <string name="luas">Luas</string>
+    <string name="usia">Usia</string>
+    <string name="judul_berita_exp">Sektor Pertanian Indramayu Tetap Produktif di Musim Kemarau</string>
+    <string name="judul_berita">Judul berita</string>
+    <string name="isi_berita_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

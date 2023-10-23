@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.artikel.berita.berita_detail.BeritaDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivBerita"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars"/>
+
+        <TextView
+            android:id="@+id/tvBeritaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="2dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/judul_berita" />
+
+        <TextView
+            android:id="@+id/tvBeritaIsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="2dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/isi_berita_lorem"
+            android:lineSpacingMultiplier="1.5"/>
+
+    </LinearLayout>
+
+</ScrollView>
