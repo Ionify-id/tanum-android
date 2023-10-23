@@ -27,6 +27,13 @@
     <string name="lihat_lahan_lainnya"><![CDATA[Lihat lahan lainnya >]]></string>
     <string name="lihat_artikel_lainnya"><![CDATA[Lihat artikel lainnya >]]></string>
     <string name="artikel_null">Artikel belum tersedia</string>
+    <string name="berita">Berita</string>
+    <string name="lihat_berita_lainnya"><![CDATA[Lihat berita lainnya >]]></string>
+    <string name="berita_null">Berita belum tersedia</string>
+    <string name="video">Video</string>
+    <string name="lihat_video_lainnya"><![CDATA[Lihat video lainnya >]]></string>
+    <string name="video_null">Video belum tersedia</string>
+    <string name="log_out">Log out</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

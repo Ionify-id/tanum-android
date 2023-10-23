@@ -19,8 +19,6 @@ class LahanSayaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this)[LahanSayaViewModel::class.java]
 
         _binding = FragmentLahanSayaBinding.inflate(inflater, container, false)
         val root: View = binding.root

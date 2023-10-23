@@ -6,8 +6,4 @@ import androidx.lifecycle.ViewModel
 
 class BerandaViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is beranda Fragment"
-    }
-    val text: LiveData<String> = _text
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.tanum.app.R
 import com.tanum.app.databinding.FragmentArtikelBinding
 
 class ArtikelFragment : Fragment() {
@@ -19,17 +21,17 @@ class ArtikelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ArtikelViewModel::class.java)
 
         _binding = FragmentArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        setupAction()
+
         return root
+    }
+
+    private fun setupAction() {
+
     }
 
     override fun onDestroyView() {
