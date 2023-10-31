@@ -1,4 +1,4 @@
-package com.tanum.app.ui.login
+package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
 

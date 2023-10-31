@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.lahan_saya.detail_lahan.aktivitas.AktivitasActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/frameLayoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <ImageView
+                    android:id="@+id/imageViewLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:src="@tools:sample/avatars"
+                    android:scaleType="centerCrop"
+                    android:importantForAccessibility="no" />
+                
+                <Button
+                    android:id="@+id/buttonBack"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ic_baseline_arrow_back_24"
+                    android:backgroundTint="@color/white"
+                    android:layout_gravity="start|top" />
+
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ic_baseline_delete_24"
+                    android:backgroundTint="@color/white"
+                    android:layout_gravity="end|top" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutTextContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:layout_marginBottom="24dp" >
+
+                    <TextView
+                        android:id="@+id/textViewNamaLahan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="@string/nama_lahan"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/lato_bold" />
+
+                    <TextView
+                        android:id="@+id/textViewAlamatLahan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/alamat"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/lato_regular" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameLayoutContainer" >
+
+                <TableLayout
+                    android:id="@+id/tableLayoutInfoContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                    <!--Kepemilikan-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/kepemilikan"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewKepelimilikanValue"
+                            android:gravity="right"
+                            android:text="@string/kepemilikan"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!--Luas-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/luas"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewLuasValue"
+                            android:gravity="right"
+                            android:text="@string/luas"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!--Tanaman-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/tanaman"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewTanamanValue"
+                            android:gravity="right"
+                            android:text="@string/tanaman"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!--Varietas-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/varietas"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewVarietasValue"
+                            android:gravity="right"
+                            android:text="@string/varietas"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!--Tanggal tanam-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/tanggal_tanam"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewTanggalTanamValue"
+                            android:gravity="right"
+                            android:text="@string/tanggal_tanam"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!--Usia tanaman-->
+                    <TableRow android:layout_marginVertical="4dp">
+                        <TextView
+                            android:text="@string/usia_tanaman"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewUsiaTanamanValue"
+                            android:gravity="right"
+                            android:text="@string/usia_tanaman"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/buttonEditDetailLahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_detail_lahan"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/lato_bold"
+                    android:background="@drawable/button_edit_lahan_background"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tableLayoutInfoContainer" />
+
+                <TableLayout
+                    android:id="@+id/tableLayoutAktivitasContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/buttonEditDetailLahan">
+
+                    <TableRow android:layout_marginVertical="6dp">
+                        <TextView
+                            android:text="@string/aktivitas"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </TableRow>
+
+                    <TableRow android:layout_marginVertical="6dp">
+                        <TextView
+                            android:text="@string/total_biaya"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewTotalBiayaValue"
+                            android:text="@string/total_biaya"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:gravity="right"/>
+                    </TableRow>
+
+                    <TableRow android:layout_marginVertical="6dp">
+                        <TextView
+                            android:text="@string/keuntungan"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textViewKeuntunganValue"
+                            android:text="@string/keuntungan"
+                            android:fontFamily="@font/lato_regular"
+                            android:textSize="16sp"
+                            android:gravity="right"/>
+                    </TableRow>
+
+                </TableLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAktivitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    tools:listitem="@layout/item_aktivitas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tableLayoutAktivitasContainer" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/buttonTambahkanAktivitas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tambahkan_aktivitas"
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/green_tanum"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="24dp"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
+        app:iconSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

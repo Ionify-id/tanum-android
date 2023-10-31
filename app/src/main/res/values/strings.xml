@@ -42,10 +42,73 @@
     <string name="judul_berita_exp">Sektor Pertanian Indramayu Tetap Produktif di Musim Kemarau</string>
     <string name="judul_berita">Judul berita</string>
     <string name="isi_berita_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="template_tanggal">hh MM YYYY</string>
+    <string name="kategori">Kategori</string>
+    <string name="kegiatan">Kegiatan</string>
+    <string name="biaya">Biaya</string>
+    <string name="alamat">Alamat</string>
+    <string name="kepemilikan">Kepemilikan</string>
+    <string name="tanaman">Tanaman</string>
+    <string name="tanggal_mulai_tanam">Tanggal mulai tanam</string>
+    <string name="tambahkan_aktivitas">Tambahkan aktivitas</string>
+    <string name="varietas">Varietas</string>
+    <string name="tanggal_tanam">Tanggal tanam</string>
+    <string name="usia_tanaman">Usia tanaman</string>
+    <string name="edit_detail_lahan">Edit detail lahan</string>
+    <string name="aktivitas">Aktivitas</string>
+    <string name="total_biaya">Total biaya</string>
+    <string name="keuntungan">Keuntungan</string>
+    <string name="waktu_kegiatan">Waktu kegiatan</string>
 
     <!--    String array for drop down-->
     <string-array name="role">
         <item>Petani</item>
         <item>Pengepul</item>
+    </string-array>
+
+    <string-array name="kepemilikan">
+        <item>Milik sendiri</item>
+        <item>Sewa</item>
+        <item>Bagi hasil</item>
+    </string-array>
+    
+    <string-array name="kategori">
+        <item>Pra-tanam</item>
+        <item>Tanam</item>
+        <item>Pemeliharaan</item>
+        <item>Panen</item>
+        <item>Penjualan</item>
+    </string-array>
+    
+    <string-array name="pra_tanam">
+        <item>Pembersihan lahan</item>
+        <item>Bajak lahan</item>
+        <item>Pembelian herbisida</item>
+        <item>Penyemprotan lahan</item>
+        <item>Pembalian pupuk</item>
+        <item>Pemupukan lahan</item>
+    </string-array>
+
+    <string-array name="tanam">
+        <item>Pembelian bibit</item>
+        <item>Pemotongan bibit</item>
+        <item>Penanaman</item>
+    </string-array>
+
+    <string-array name="pemeliharaan">
+        <item>Penyulaman</item>
+        <item>Penyemprotan</item>
+        <item>Pemangkasan tunas</item>
+        <item>Pembalian pupuk</item>
+        <item>Pemupukan lahan</item>
+    </string-array>
+
+    <string-array name="panen">
+        <item>Ongkos pencabutan</item>
+        <item>Ongkos transportasi</item>
+    </string-array>
+
+    <string-array name="penjualan">
+        <item>Penjualan hasil panen</item>
     </string-array>
 </resources>

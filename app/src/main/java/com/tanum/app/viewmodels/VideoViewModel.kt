@@ -1,4 +1,4 @@
-package com.tanum.app.ui.main.artikel.video
+package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
 
