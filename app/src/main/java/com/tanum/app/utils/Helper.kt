@@ -2,6 +2,8 @@ package com.tanum.app.utils
 
 import android.content.Context
 import android.app.DatePickerDialog
+import com.google.gson.Gson
+import com.tanum.app.data.remote.response.ErrorResponse
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -20,4 +22,8 @@ object DatePickerHelper {
 
         datePickerDialog.show()
     }
+}
+
+fun convertErrorResponse(stringRes: String?): ErrorResponse {
+    return Gson().fromJson(stringRes, ErrorResponse::class.java)
 }

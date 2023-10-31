@@ -8,14 +8,14 @@ data class LoginResponse(
 	val data: TokenData? = null,
 
 	@field:SerializedName("message")
-	val message: String? = null,
+	val message: String,
 
 	@field:SerializedName("status")
-	val status: Boolean? = null
+	val status: Boolean
 )
 
 data class TokenData(
 
 	@field:SerializedName("token")
-	val token: String? = null
+	val token: String
 )
