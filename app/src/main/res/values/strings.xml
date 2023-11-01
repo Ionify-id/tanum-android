@@ -71,7 +71,7 @@
         <item>Sewa</item>
         <item>Bagi hasil</item>
     </string-array>
-    
+
     <string-array name="kategori">
         <item>Pra-tanam</item>
         <item>Tanam</item>
@@ -79,7 +79,7 @@
         <item>Panen</item>
         <item>Penjualan</item>
     </string-array>
-    
+
     <string-array name="pra_tanam">
         <item>Pembersihan lahan</item>
         <item>Bajak lahan</item>

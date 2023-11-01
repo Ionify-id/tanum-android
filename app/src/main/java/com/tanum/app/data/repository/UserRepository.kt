@@ -1,19 +1,22 @@
 package com.tanum.app.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.tanum.app.data.AuthPreferences
+import com.tanum.app.data.UserPreference
+import com.tanum.app.data.model.ProfileData
 import com.tanum.app.data.model.body.LoginBody
 import com.tanum.app.data.model.body.RegisterBody
 import com.tanum.app.data.remote.retrofit.ApiService
 import com.tanum.app.utils.Result
 import com.tanum.app.utils.convertErrorResponse
 import com.tanum.app.utils.wrapEspressoIdlingResource
+import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
 class UserRepository private constructor(
     private val apiService: ApiService,
-    private val authPreferences: AuthPreferences
+    private val userPreference: UserPreference
 ) {
 
     fun postLogin(
@@ -27,7 +30,11 @@ class UserRepository private constructor(
                 val response = apiService.login(LoginBody(email, password))
 
                 if (response.data != null) {
-                    authPreferences.setToken(response.data.token)
+                    userPreference.saveToken(response.data.token)
+
+                    val profile = apiService.getUserProfile("Bearer ${response.data.token}")
+                    saveProfile(profile.data)
+
                     emit(Result.Success(response.message))
                 } else {
                     emit(Result.Error(response.message))
@@ -78,13 +85,36 @@ class UserRepository private constructor(
         }
     }
 
-    fun logout() {
-        authPreferences.clearToken()
+    private suspend fun saveProfile(profile: ProfileData) {
+        userPreference.saveProfile(profile)
     }
 
-//      need to edit authPref
-//    fun getProfileDetail(): LiveData<ProfileData> = liveData {
-//
-//    }
+    fun getProfileDetail(): LiveData<ProfileData> = liveData {
+        userPreference.getProfile()
+    }
 
+    suspend fun logout() {
+        userPreference.apply {
+            clearProfile()
+            saveToken("")
+        }
+    }
+
+    fun getToken(): Flow<String> {
+        return userPreference.getToken()
+    }
+
+    companion object {
+        @Volatile
+        private var instance: UserRepository? = null
+        fun getInstance(
+            apiService: ApiService,
+            pref: UserPreference
+        ): UserRepository =
+            instance ?: synchronized(this) {
+                instance ?: UserRepository(apiService, pref)
+            }.also {
+                instance = it
+            }
+    }
 }

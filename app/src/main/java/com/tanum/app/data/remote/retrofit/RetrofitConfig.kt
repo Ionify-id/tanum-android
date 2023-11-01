@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitConfig {
     companion object {
         fun getApiService(): ApiService {
-            val BASE_URL = "https://tanum-admin.duckdns.org/api/v1"
+            val BASE_URL = "https://tanum-admin.duckdns.org/api/v1/"
             val loggingInterceptor = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {

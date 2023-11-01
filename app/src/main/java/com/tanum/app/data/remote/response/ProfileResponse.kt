@@ -6,11 +6,11 @@ import com.tanum.app.data.model.ProfileData
 data class ProfileResponse(
 
 	@field:SerializedName("data")
-	val data: ProfileData? = null,
+	val data: ProfileData,
 
 	@field:SerializedName("message")
-	val message: String? = null,
+	val message: String,
 
 	@field:SerializedName("status")
-	val status: Boolean? = null
+	val status: Boolean
 )
