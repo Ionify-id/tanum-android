@@ -1,17 +1,15 @@
 package com.tanum.app.data.remote.response
 
 import com.google.gson.annotations.SerializedName
+import com.tanum.app.data.model.Meta
 
 data class LoginResponse(
 
 	@field:SerializedName("data")
-	val data: TokenData? = null,
+	val data: TokenData,
 
-	@field:SerializedName("message")
-	val message: String,
-
-	@field:SerializedName("status")
-	val status: Boolean
+	@field:SerializedName("meta")
+	val meta: Meta
 )
 
 data class TokenData(

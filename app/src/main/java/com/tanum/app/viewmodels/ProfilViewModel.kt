@@ -1,13 +1,16 @@
 package com.tanum.app.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.tanum.app.data.model.ProfileData
+import com.tanum.app.data.repository.UserRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
-class ProfilViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profil Fragment"
+class ProfilViewModel(private val userRepository: UserRepository) : ViewModel() {
+    val profile: Flow<ProfileData> = userRepository.getProfileDetail()
+    fun logout() = viewModelScope.launch {
+        userRepository.logout()
     }
-    val text: LiveData<String> = _text
 }

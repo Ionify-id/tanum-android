@@ -59,6 +59,11 @@
     <string name="total_biaya">Total biaya</string>
     <string name="keuntungan">Keuntungan</string>
     <string name="waktu_kegiatan">Waktu kegiatan</string>
+    <string name="failed">Failed</string>
+    <string name="success">Success</string>
+    <string name="next">Continue</string>
+    <string name="required_form">Anda harus mengisi semua form terlebih dahulu</string>
+    <string name="register_failed_message">Anda gagal mendaftar.</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

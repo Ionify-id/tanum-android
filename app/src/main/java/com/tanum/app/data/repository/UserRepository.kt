@@ -1,7 +1,7 @@
 package com.tanum.app.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.tanum.app.data.UserPreference
 import com.tanum.app.data.model.ProfileData
@@ -28,17 +28,14 @@ class UserRepository private constructor(
         wrapEspressoIdlingResource {
             try {
                 val response = apiService.login(LoginBody(email, password))
+                val token = response.data.token
+                userPreference.saveToken(token)
+                Log.d("Success", token)
 
-                if (response.data != null) {
-                    userPreference.saveToken(response.data.token)
+                val profile = apiService.getUserProfile("Bearer $token")
+                saveProfile(profile.data)
 
-                    val profile = apiService.getUserProfile("Bearer ${response.data.token}")
-                    saveProfile(profile.data)
-
-                    emit(Result.Success(response.message))
-                } else {
-                    emit(Result.Error(response.message))
-                }
+                emit(Result.Success(response.meta.message))
             } catch (e: Exception) {
                 when(e) {
                     is HttpException -> {
@@ -65,10 +62,11 @@ class UserRepository private constructor(
         wrapEspressoIdlingResource {
             try {
                 val response = apiService.register(RegisterBody(job, email, password, fullName))
-                if (response.status) {
-                    emit(Result.Success(response.message))
+                val msg = response.meta.message
+                if (response.meta.code == 201) {
+                    emit(Result.Success(msg))
                 } else {
-                    emit(Result.Error(response.message))
+                    emit(Result.Error(msg))
                 }
             } catch (e: Exception) {
                 when(e) {
@@ -89,8 +87,8 @@ class UserRepository private constructor(
         userPreference.saveProfile(profile)
     }
 
-    fun getProfileDetail(): LiveData<ProfileData> = liveData {
-        userPreference.getProfile()
+    fun getProfileDetail(): Flow<ProfileData> {
+        return userPreference.getProfile()
     }
 
     suspend fun logout() {
