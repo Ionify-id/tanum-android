@@ -70,7 +70,9 @@ interface ApiService {
     // get list lahan
     @GET("lands")
     suspend fun getListLahan(
-        @Header("Authorization") auth: String
+        @Header("Authorization") auth: String,
+        @Query("page") page: Int? = 1,
+        @Query("take") take: Int? = 3
     ): ListLahanResponse
 
     // delete lahan
@@ -104,14 +106,16 @@ interface ApiService {
     @GET("activities/{landId}")
     suspend fun getListActivityByLand(
         @Path("landId") landId: Int,
-        @Header("Authorization") auth: String
+        @Header("Authorization") auth: String,
+        @Query("page") page: Int? = 1,
+        @Query("take") take: Int? = 3
     ): ListAktivitasResponse
 
     // delete activity
     @DELETE("activities/{activityId}")
     suspend fun deleteActivity(
-        @Path("activityId") activityId: Int,
-        @Header("Authorization") auth: String
+        @Header("Authorization") auth: String,
+        @Path("activityId") activityId: Int
     ): DeleteResponse
 
     /*
@@ -121,16 +125,16 @@ interface ApiService {
     // get list article
     @GET("articles")
     suspend fun getListArticles(
+        @Header("Authorization") auth: String,
         @Query("page") page: Int,
-        @Query("take") take: Int,
-        @Header("Authorization") auth: String
+        @Query("take") take: Int
     ): ListArtikelResponse
 
     // get article detail
     @GET("articles/{articleId}")
     suspend fun getArticleDetail(
-        @Path("articleId") articleId: Int,
-        @Header("Authorization") auth: String
+        @Header("Authorization") auth: String,
+        @Path("articleId") articleId: Int
     ): ArtikelResponse
 
     /*
@@ -140,9 +144,9 @@ interface ApiService {
     // get list video
     @GET("videos")
     suspend fun getListVideo(
+        @Header("Authorization") auth: String,
         @Query("page") page: Int,
-        @Query("take") take: Int,
-        @Header("Authorization") auth: String
+        @Query("take") take: Int
     ): ListVideoResponse
 
 }

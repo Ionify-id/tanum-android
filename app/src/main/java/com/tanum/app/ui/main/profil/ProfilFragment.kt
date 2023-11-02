@@ -29,7 +29,9 @@ class ProfilFragment : Fragment() {
         factory = ViewModelFactory.getInstance(requireActivity())
         _binding = FragmentProfilBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         setupView()
+
         return root
     }
 

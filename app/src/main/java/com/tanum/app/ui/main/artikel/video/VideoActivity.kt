@@ -23,7 +23,6 @@ class VideoActivity : AppCompatActivity() {
     private fun setupRecyclerViewFragment() {
         val fragmentManager = supportFragmentManager
         val videoFragment = VideoFragment()
-//        val fragment = fragmentManager.findFragmentByTag(BeritaFragment::class.java.simpleName)
         fragmentManager
             .beginTransaction()
             .add(com.tanum.app.R.id.fragmentContainerVideo, videoFragment, BeritaFragment::class.java.simpleName)

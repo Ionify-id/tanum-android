@@ -1,22 +1,27 @@
 package com.tanum.app.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.tanum.app.data.model.Meta
+import kotlinx.parcelize.Parcelize
 
 data class ListArtikelResponse(
 
 	@field:SerializedName("data")
-	val data: List<ArtikelListItem?>? = null,
+	val data: ArrayList<ArticleListItem>,
 
 	@field:SerializedName("meta")
-	val meta: Meta? = null
+	val meta: Meta
 )
 
-data class ArtikelListItem(
+@Parcelize
+data class ArticleListItem(
+	@field:SerializedName("id")
+	val id: Int,
 
 	@field:SerializedName("thumbnail")
-	val thumbnail: String? = null,
+	val thumbnail: String,
 
 	@field:SerializedName("title")
-	val title: String? = null
-)
+	val title: String
+): Parcelable

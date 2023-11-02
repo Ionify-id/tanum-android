@@ -7,10 +7,10 @@ import com.tanum.app.data.model.VideoData
 data class ListVideoResponse(
 
 	@field:SerializedName("data")
-	val data: List<VideoData?>? = null,
+	val data: ArrayList<VideoData>,
 
 	@field:SerializedName("meta")
-	val meta: Meta? = null
+	val meta: Meta
 )
 
 

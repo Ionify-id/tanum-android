@@ -7,8 +7,8 @@ import com.tanum.app.data.model.Meta
 data class ArtikelResponse(
 
 	@field:SerializedName("data")
-	val data: ArtikelData? = null,
+	val data: ArtikelData,
 
 	@field:SerializedName("meta")
-	val meta: Meta? = null
+	val meta: Meta
 )
