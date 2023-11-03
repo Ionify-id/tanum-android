@@ -61,7 +61,8 @@ class ArticleRepository(
     ): LiveData<PagingData<ArticleListItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 3
+                pageSize = 5,
+                initialLoadSize = 5
             ),
             pagingSourceFactory = {
                 ArticlePagingSource(apiService, token)
@@ -136,7 +137,8 @@ class ArticleRepository(
     ): LiveData<PagingData<VideoData>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 3
+                pageSize = 5,
+                initialLoadSize = 5
             ),
             pagingSourceFactory = {
                 VideoPagingSource(apiService, token)

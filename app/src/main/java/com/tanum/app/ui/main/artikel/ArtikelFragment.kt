@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -102,7 +101,6 @@ class ArtikelFragment : Fragment() {
                                 rvListBerita
                             )
                         }
-
                     }
                     is Result.Success -> {
                         with (binding) {

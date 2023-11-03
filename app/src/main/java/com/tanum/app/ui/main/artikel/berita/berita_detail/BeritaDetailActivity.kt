@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
@@ -46,7 +47,8 @@ class BeritaDetailActivity : AppCompatActivity() {
                                 val news = result.data
                                 with(binding) {
                                     tvBeritaTitle.text = news.title
-                                    tvBeritaIsi.text = news.description
+                                    val styledText = HtmlCompat.fromHtml(news.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                                    tvBeritaIsi.text = styledText
                                     Glide.with(this@BeritaDetailActivity)
                                         .load(news.thumbnail)
                                         .into(ivBerita)

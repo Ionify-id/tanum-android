@@ -20,6 +20,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(ProfilViewModel::class.java) -> ProfilViewModel(userRepository) as T
             modelClass.isAssignableFrom(ArtikelViewModel::class.java) -> ArtikelViewModel(userRepository, articleRepository) as T
             modelClass.isAssignableFrom(BeritaDetailViewModel::class.java) -> BeritaDetailViewModel(userRepository, articleRepository) as T
+            modelClass.isAssignableFrom(BeritaViewModel::class.java) -> BeritaViewModel(userRepository, articleRepository) as T
+            modelClass.isAssignableFrom(VideoViewModel::class.java) -> VideoViewModel(userRepository, articleRepository) as T
+            modelClass.isAssignableFrom(BerandaViewModel::class.java) -> BerandaViewModel(userRepository, articleRepository) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

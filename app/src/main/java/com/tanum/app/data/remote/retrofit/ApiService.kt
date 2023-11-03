@@ -71,8 +71,8 @@ interface ApiService {
     @GET("lands")
     suspend fun getListLahan(
         @Header("Authorization") auth: String,
-        @Query("page") page: Int? = 1,
-        @Query("take") take: Int? = 3
+        @Query("page") page: Int,
+        @Query("take") take: Int
     ): ListLahanResponse
 
     // delete lahan
@@ -107,8 +107,8 @@ interface ApiService {
     suspend fun getListActivityByLand(
         @Path("landId") landId: Int,
         @Header("Authorization") auth: String,
-        @Query("page") page: Int? = 1,
-        @Query("take") take: Int? = 3
+        @Query("page") page: Int,
+        @Query("take") take: Int
     ): ListAktivitasResponse
 
     // delete activity

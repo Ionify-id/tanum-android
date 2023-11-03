@@ -1,5 +1,6 @@
 package com.tanum.app.data.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.tanum.app.data.remote.response.ArticleListItem
@@ -25,12 +26,13 @@ class ArticlePagingSource(
         return try {
 
             val position = params.key ?: INITIAL_PAGE_INDEX
+
             val responseData = apiService.getListArticles("Bearer $token", position, params.loadSize).data
 
             LoadResult.Page(
                 data = responseData,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-                nextKey = if (responseData.isNullOrEmpty()) null else position + 1
+                nextKey = if (responseData.isEmpty()) null else position + 1
             )
 
         } catch (e: Exception) {
