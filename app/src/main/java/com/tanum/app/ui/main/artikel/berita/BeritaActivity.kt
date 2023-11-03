@@ -15,18 +15,7 @@ class BeritaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBeritaBinding.inflate(layoutInflater)
         setupActionBar(binding.toolbar)
-        setupRecyclerViewFragment()
         setContentView(binding.root)
-    }
-
-    private fun setupRecyclerViewFragment() {
-        val fragmentManager = supportFragmentManager
-        val beritaFragment = BeritaFragment()
-//        val fragment = fragmentManager.findFragmentByTag(BeritaFragment::class.java.simpleName)
-        fragmentManager
-            .beginTransaction()
-            .add(R.id.fragmentContainerBerita, beritaFragment, BeritaFragment::class.java.simpleName)
-            .commit()
     }
 
     private fun setupActionBar(toolbar: MaterialToolbar) {

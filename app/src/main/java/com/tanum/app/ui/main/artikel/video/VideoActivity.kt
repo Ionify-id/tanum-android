@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.tanum.app.databinding.ActivityVideoBinding
-import com.tanum.app.ui.main.artikel.berita.BeritaFragment
 
 class VideoActivity : AppCompatActivity() {
 
@@ -16,17 +15,7 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityVideoBinding.inflate(layoutInflater)
         setupActionBar(binding.toolbar)
-        setupRecyclerViewFragment()
         setContentView(binding.root)
-    }
-
-    private fun setupRecyclerViewFragment() {
-        val fragmentManager = supportFragmentManager
-        val videoFragment = VideoFragment()
-        fragmentManager
-            .beginTransaction()
-            .add(com.tanum.app.R.id.fragmentContainerVideo, videoFragment, BeritaFragment::class.java.simpleName)
-            .commit()
     }
 
     private fun setupActionBar(toolbar: MaterialToolbar) {

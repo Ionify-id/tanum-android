@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,9 @@ import com.tanum.app.data.model.VideoData
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.FragmentArtikelBinding
 import com.tanum.app.ui.main.artikel.berita.BeritaActivity
+import com.tanum.app.ui.main.artikel.berita.berita_detail.BeritaDetailActivity
 import com.tanum.app.ui.main.artikel.video.VideoActivity
+import com.tanum.app.ui.main.artikel.video.video_detail.VideoDetailActivity
 import com.tanum.app.utils.Result
 import com.tanum.app.viewmodels.ArtikelViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
@@ -70,7 +73,20 @@ class ArtikelFragment : Fragment() {
             val intent = Intent(activity, VideoActivity::class.java)
             startActivity(intent)
         }
-        // TODO: 1. Bikin action click buat item video sama berita -> intent ke detail
+        articleAdapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
+            override fun onItemClicked(article: ArticleListItem) {
+                val intentToDetail = Intent(requireActivity(), BeritaDetailActivity::class.java)
+                intentToDetail.putExtra(BeritaDetailActivity.EXTRA_ID, article.id)
+                startActivity(intentToDetail)
+            }
+        })
+        videoAdapter.setOnItemClickCallback(object : VideoAdapter.OnItemClickCallback {
+            override fun onItemClicked(article: VideoData) {
+                val intentToDetail = Intent(requireActivity(), VideoDetailActivity::class.java)
+                intentToDetail.putExtra(VideoDetailActivity.EXTRA_URL, article.url)
+                startActivity(intentToDetail)
+            }
+        })
     }
 
     private fun observeArticleData(token: String) {
@@ -185,8 +201,8 @@ class ArtikelFragment : Fragment() {
 
     @Suppress("UNCHECKED_CAST")
     private fun <T> handleSuccessState(
-        data: ArrayList<T>, recyclerView:
-        RecyclerView,
+        data: ArrayList<T>,
+        recyclerView: RecyclerView,
         adapter: RecyclerView.Adapter<*>
     ) {
         when (adapter) {

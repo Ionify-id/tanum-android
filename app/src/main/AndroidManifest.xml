@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Tanum"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.artikel.video.video_detail.VideoDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.artikel.berita.berita_detail.BeritaDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>

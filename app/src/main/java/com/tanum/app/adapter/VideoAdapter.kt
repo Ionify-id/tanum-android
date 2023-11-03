@@ -2,16 +2,11 @@ package com.tanum.app.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.VideoView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
 import com.tanum.app.data.model.VideoData
-import com.tanum.app.data.remote.response.ArticleListItem
-import com.tanum.app.databinding.ItemArticleBinding
 import com.tanum.app.databinding.ItemVideoBinding
-import com.tanum.app.utils.ArticleDiffCallback
 import com.tanum.app.utils.VideoDiffCallback
 
 class VideoAdapter: RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
@@ -62,5 +57,9 @@ class VideoAdapter: RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
     interface OnItemClickCallback {
         fun onItemClicked(article: VideoData)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
     }
 }

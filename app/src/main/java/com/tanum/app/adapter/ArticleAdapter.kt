@@ -51,4 +51,8 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
     interface OnItemClickCallback {
         fun onItemClicked(article: ArticleListItem)
     }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
+    }
 }
