@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tanum.app.R
-import com.tanum.app.adapter.ArticleAdapter
-import com.tanum.app.adapter.VideoAdapter
+import com.tanum.app.adapter.article.ArticleAdapter
+import com.tanum.app.adapter.video.VideoAdapter
 import com.tanum.app.data.model.VideoData
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.FragmentArtikelBinding

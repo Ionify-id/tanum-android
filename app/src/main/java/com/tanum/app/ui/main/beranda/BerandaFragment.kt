@@ -15,15 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tanum.app.R
-import com.tanum.app.adapter.ArticleAdapter
+import com.tanum.app.adapter.article.ArticleAdapter
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.FragmentBerandaBinding
 import com.tanum.app.ui.main.artikel.berita.berita_detail.BeritaDetailActivity
 import com.tanum.app.utils.Result
-import com.tanum.app.viewmodels.ArtikelViewModel
 import com.tanum.app.viewmodels.BerandaViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BerandaFragment : Fragment() {
@@ -68,7 +66,6 @@ class BerandaFragment : Fragment() {
                 intentToDetail.putExtra(BeritaDetailActivity.EXTRA_ID, article.id)
                 startActivity(intentToDetail)
             }
-
         })
     }
 

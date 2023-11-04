@@ -1,4 +1,4 @@
-package com.tanum.app.adapter
+package com.tanum.app.adapter.video
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.tanum.app.data.model.VideoData
 import com.tanum.app.databinding.ItemVideoBinding
 
-class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoPagingViewHolder>(DIFF_CALLBACK) {
+class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoPagingViewHolder>(
+    DIFF_CALLBACK
+) {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 

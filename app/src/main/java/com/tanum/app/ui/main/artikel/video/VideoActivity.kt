@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
-import com.tanum.app.adapter.VideoPagingAdapter
+import com.tanum.app.adapter.video.VideoPagingAdapter
 import com.tanum.app.data.model.VideoData
 import com.tanum.app.databinding.ActivityVideoBinding
 import com.tanum.app.ui.main.artikel.video.video_detail.VideoDetailActivity
-import com.tanum.app.viewmodels.BeritaViewModel
 import com.tanum.app.viewmodels.VideoViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
 import kotlinx.coroutines.launch

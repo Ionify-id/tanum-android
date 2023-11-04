@@ -6,14 +6,13 @@ import com.tanum.app.data.model.Meta
 data class DeleteResponse(
 
 	@field:SerializedName("data")
-	val data: DeleteMessage? = null,
+	val data: DeleteMessage,
 
 	@field:SerializedName("meta")
-	val meta: Meta? = null
+	val meta: Meta
 )
 
 data class DeleteMessage(
-
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String
 )

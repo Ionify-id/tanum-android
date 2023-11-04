@@ -1,4 +1,4 @@
-package com.tanum.app.adapter
+package com.tanum.app.adapter.video
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

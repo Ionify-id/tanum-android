@@ -13,11 +13,10 @@ import com.tanum.app.data.paging.VideoPagingSource
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.data.remote.retrofit.ApiService
 import com.tanum.app.utils.Result
-import com.tanum.app.utils.convertErrorResponse
+import com.tanum.app.utils.handleCatchError
 import com.tanum.app.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 
 class ArticleRepository(
     private val apiService: ApiService
@@ -41,25 +40,15 @@ class ArticleRepository(
                     emit(Result.Error(response.meta.message))
                 }
             } catch (e: Exception) {
-                when (e) {
-                    is HttpException -> {
-                        val jsonRes = convertErrorResponse(e.response()?.errorBody()?.string())
-                        val msg = jsonRes.message
-                        emit(Result.Error(msg))
-                    }
-                    else -> {
-                        emit(Result.Error(e.message.toString()))
-                    }
-                }
+                handleCatchError(e)
             }
         }
     }
 
-    // TODO: 2. implement infinite articles
     fun getAllArticles(
         token: String
-    ): LiveData<PagingData<ArticleListItem>> {
-        return Pager(
+    ): LiveData<PagingData<ArticleListItem>> = liveData {
+        Pager(
             config = PagingConfig(
                 pageSize = 5,
                 initialLoadSize = 5
@@ -67,7 +56,7 @@ class ArticleRepository(
             pagingSourceFactory = {
                 ArticlePagingSource(apiService, token)
             }
-        ).liveData
+        )
     }
 
     fun getArticleDetail(
@@ -85,16 +74,7 @@ class ArticleRepository(
                     emit(Result.Error(response.meta.message))
                 }
             } catch (e: Exception) {
-                when (e) {
-                    is HttpException -> {
-                        val jsonRes = convertErrorResponse(e.response()?.errorBody()?.string())
-                        val msg = jsonRes.message
-                        emit(Result.Error(msg))
-                    }
-                    else -> {
-                        emit(Result.Error(e.message.toString()))
-                    }
-                }
+                handleCatchError(e)
             }
         }
     }
@@ -117,21 +97,11 @@ class ArticleRepository(
                     emit(Result.Error(response.meta.message))
                 }
             } catch (e: Exception) {
-                when (e) {
-                    is HttpException -> {
-                        val jsonRes = convertErrorResponse(e.response()?.errorBody()?.string())
-                        val msg = jsonRes.message
-                        emit(Result.Error(msg))
-                    }
-                    else -> {
-                        emit(Result.Error(e.message.toString()))
-                    }
-                }
+                handleCatchError(e)
             }
         }
     }
 
-    // TODO: 3. implement infitinite videos
     fun getAllVideos(
         token: String
     ): LiveData<PagingData<VideoData>> {

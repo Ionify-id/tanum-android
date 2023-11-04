@@ -5,41 +5,41 @@ import com.google.gson.annotations.SerializedName
 data class LahanData(
 
     @field:SerializedName("area")
-    val area: Int? = null,
+    val area: Int,
 
     @field:SerializedName("image")
-    val image: String? = null,
+    val image: String,
 
     @field:SerializedName("address")
-    val address: String? = null,
+    val address: String,
 
     @field:SerializedName("varietas")
-    val varietas: String? = null,
+    val varietas: String,
 
     @field:SerializedName("userId")
-    val userId: Int? = null,
+    val userId: Int,
 
     @field:SerializedName("createdAt")
-    val createdAt: String? = null,
+    val createdAt: String,
 
     @field:SerializedName("ownership")
-    val ownership: String? = null,
+    val ownership: String,
 
     @field:SerializedName("dateStart")
-    val dateStart: String? = null,
+    val dateStart: String,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    val name: String,
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @field:SerializedName("profit")
-    val profit: Int? = null,
+    val profit: Int,
 
     @field:SerializedName("totalCost")
-    val totalCost: Int? = null,
+    val totalCost: Int,
 
     @field:SerializedName("updatedAt")
-    val updatedAt: String? = null
+    val updatedAt: String
 )

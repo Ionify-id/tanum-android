@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import com.tanum.app.data.remote.response.ErrorResponse
+import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -46,6 +47,15 @@ object AlertDialogHelper{
     }
 }
 
-fun convertErrorResponse(stringRes: String?): ErrorResponse {
-    return Gson().fromJson(stringRes, ErrorResponse::class.java)
+fun handleCatchError(e: Throwable): Result<String> {
+    return when (e) {
+        is HttpException -> {
+            val jsonRes = Gson().fromJson(e.response()?.errorBody()?.string(), ErrorResponse::class.java)
+            val msg = jsonRes.message
+            Result.Error(msg)
+        }
+        else -> {
+            Result.Error(e.message.toString())
+        }
+    }
 }

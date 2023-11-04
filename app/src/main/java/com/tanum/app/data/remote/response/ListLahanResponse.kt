@@ -7,8 +7,8 @@ import com.tanum.app.data.model.Meta
 data class ListLahanResponse(
 
 	@field:SerializedName("data")
-	val data: List<LahanData?>? = null,
+	val data: ArrayList<LahanData>,
 
 	@field:SerializedName("meta")
-	val meta: Meta? = null
+	val meta: Meta
 )

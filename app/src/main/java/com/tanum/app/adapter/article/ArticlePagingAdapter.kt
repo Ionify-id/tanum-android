@@ -1,4 +1,4 @@
-package com.tanum.app.adapter
+package com.tanum.app.adapter.article
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.ItemArticleBinding
 
-class ArticlePagingAdapter: PagingDataAdapter<ArticleListItem, ArticlePagingAdapter.ArticlePagingViewHolder>(DIFF_CALLBACK) {
+class ArticlePagingAdapter: PagingDataAdapter<ArticleListItem, ArticlePagingAdapter.ArticlePagingViewHolder>(
+    DIFF_CALLBACK
+) {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 

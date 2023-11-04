@@ -114,8 +114,8 @@ interface ApiService {
     // delete activity
     @DELETE("activities/{activityId}")
     suspend fun deleteActivity(
-        @Header("Authorization") auth: String,
-        @Path("activityId") activityId: Int
+        @Path("activityId") activityId: Int,
+        @Header("Authorization") auth: String
     ): DeleteResponse
 
     /*

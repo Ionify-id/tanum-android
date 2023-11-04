@@ -4,13 +4,12 @@ import android.R.id.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
-import com.tanum.app.adapter.ArticlePagingAdapter
+import com.tanum.app.adapter.article.ArticlePagingAdapter
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.ActivityBeritaBinding
 import com.tanum.app.ui.main.artikel.berita.berita_detail.BeritaDetailActivity
