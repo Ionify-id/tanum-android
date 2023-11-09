@@ -4,6 +4,7 @@ import android.R.id.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +41,10 @@ class BeritaActivity : AppCompatActivity() {
                 beritaViewModel.getListArticle(token).observe(this@BeritaActivity) { data ->
                     if (data != null) {
                         adapter.submitData(lifecycle, data)
+                    }
+                    if (adapter.itemCount != 0) {
+                        binding.rvListBerita.visibility = View.VISIBLE
+                        binding.tvBeritaNullInfo.visibility = View.GONE
                     }
                     adapter.setOnItemClickCallback(object : ArticlePagingAdapter.OnItemClickCallback {
                         override fun onItemClicked(article: ArticleListItem) {

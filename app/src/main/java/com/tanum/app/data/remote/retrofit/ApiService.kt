@@ -69,15 +69,15 @@ interface ApiService {
 
     // get list lahan
     @GET("lands")
-    suspend fun getListLahan(
+    suspend fun getListLand(
         @Header("Authorization") auth: String,
         @Query("page") page: Int,
         @Query("take") take: Int
     ): ListLahanResponse
 
     // delete lahan
-    @DELETE("lahan/{id}")
-    suspend fun deleteLahan(
+    @DELETE("lands/{id}")
+    suspend fun deleteLand(
         @Path("id") id: Int,
         @Header("Authorization") auth: String
     ): DeleteResponse

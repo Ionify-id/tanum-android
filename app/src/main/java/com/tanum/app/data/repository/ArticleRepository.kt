@@ -47,8 +47,8 @@ class ArticleRepository(
 
     fun getAllArticles(
         token: String
-    ): LiveData<PagingData<ArticleListItem>> = liveData {
-        Pager(
+    ): LiveData<PagingData<ArticleListItem>> {
+        return Pager(
             config = PagingConfig(
                 pageSize = 5,
                 initialLoadSize = 5
@@ -56,7 +56,7 @@ class ArticleRepository(
             pagingSourceFactory = {
                 ArticlePagingSource(apiService, token)
             }
-        )
+        ).liveData
     }
 
     fun getArticleDetail(

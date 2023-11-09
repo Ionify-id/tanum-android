@@ -5,8 +5,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.tanum.app.data.UserPreference
+import com.tanum.app.data.model.room.TanumDatabase
 import com.tanum.app.data.remote.retrofit.RetrofitConfig
 import com.tanum.app.data.repository.ArticleRepository
+import com.tanum.app.data.repository.LandRepository
 import com.tanum.app.data.repository.UserRepository
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -21,5 +23,11 @@ object Injection  {
     fun provideArticleRepository(): ArticleRepository {
         val apiService = RetrofitConfig.getApiService()
         return ArticleRepository.getInstance(apiService)
+    }
+
+    fun provideLandRepository(context: Context): LandRepository {
+        val apiService = RetrofitConfig.getApiService()
+        val database = TanumDatabase.getDatabase(context)
+        return LandRepository.getInstance(apiService, database)
     }
 }

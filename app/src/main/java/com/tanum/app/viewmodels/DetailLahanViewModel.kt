@@ -1,27 +1,25 @@
 package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.tanum.app.data.model.body.LahanBody
 import com.tanum.app.data.repository.LandRepository
 import com.tanum.app.data.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
-class FormLahanViewModel(
+class DetailLahanViewModel(
     private val userRepository: UserRepository,
     private val landRepository: LandRepository
 ): ViewModel() {
     val token: Flow<String> = userRepository.getToken()
 
-    fun createLand(
+    fun deleteLand(
         token: String,
-        landBody: LahanBody
-    ) = landRepository.createLand(token, landBody)
+        id: Int
+    ) = landRepository.deleteLand(id, token)
 
-    fun editLand(
-        id: Int,
+    fun getAllActivities(
         token: String,
-        landBody: LahanBody
-    ) = landRepository.editLand(id, token, landBody)
+        landId: Int
+    ) {
 
-
+    }
 }

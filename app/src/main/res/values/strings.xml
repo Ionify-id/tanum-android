@@ -66,6 +66,11 @@
     <string name="register_failed_message">Anda gagal mendaftar.</string>
     <string name="failed_news">Gagal memuat berita</string>
     <string name="failed_video">Gagal memuat video</string>
+    <string name="form_need_to_fill">Harap isi semua formulir terlebih dahulu</string>
+    <string name="land_edit_success">Successfully edited land</string>
+    <string name="failed_delete_land">Failed to delete land</string>
+    <string name="success_delete_land">Successfully delete land</string>
+    <string name="failed_to_load_lands">Gagal memuat lahan saya</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

@@ -16,11 +16,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tanum.app.R
 import com.tanum.app.adapter.article.ArticleAdapter
+import com.tanum.app.adapter.land.LandAdapter
+import com.tanum.app.data.model.LahanData
 import com.tanum.app.data.remote.response.ArticleListItem
 import com.tanum.app.databinding.FragmentBerandaBinding
 import com.tanum.app.ui.main.artikel.berita.berita_detail.BeritaDetailActivity
+import com.tanum.app.ui.main.lahan_saya.detail_lahan.aktivitas.DetailLahanActivity
 import com.tanum.app.utils.Result
 import com.tanum.app.viewmodels.BerandaViewModel
+import com.tanum.app.viewmodels.DetailLahanViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -31,6 +35,7 @@ class BerandaFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val berandaViewModel: BerandaViewModel by viewModels { factory }
     private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var landAdapter: LandAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +50,7 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         articleAdapter = ArticleAdapter()
+        landAdapter = LandAdapter()
         setupView()
         setupAction()
     }
@@ -67,6 +73,15 @@ class BerandaFragment : Fragment() {
                 startActivity(intentToDetail)
             }
         })
+
+        landAdapter.setOnItemClickCallback(object : LandAdapter.OnItemClickCallback {
+            override fun onItemClicked(land: LahanData) {
+                val intentToDetail = Intent(requireActivity(), DetailLahanActivity::class.java)
+                intentToDetail.putExtra(DetailLahanActivity.EXTRA_LAND, land)
+                startActivity(intentToDetail)
+            }
+
+        })
     }
 
     private fun setupView() {
@@ -74,55 +89,129 @@ class BerandaFragment : Fragment() {
             setHtmlText()
             berandaViewModel.token.collect { token ->
                 observeArticleData(token)
+                observeLandData(token)
             }
         }
     }
 
     private fun observeArticleData(token: String) {
-        berandaViewModel.getThreeArticles(token).observe(viewLifecycleOwner) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                true,
-                                tvArtikelNullInfo,
-                                recyclerViewArtikel
-                            )
-                        }
-                    }
-                    is Result.Success -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                false,
-                                tvArtikelNullInfo,
-                                recyclerViewArtikel
-                            )
-                            handleSuccessState(
-                                result.data,
-                                recyclerViewArtikel,
-                                articleAdapter
-                            )
+        if (view != null) {
+            berandaViewModel.getThreeArticles(token).observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    true,
+                                    tvArtikelNullInfo,
+                                    recyclerViewArtikel
+                                )
+                            }
                         }
 
-                    }
-                    is Result.Error -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                false,
-                                tvArtikelNullInfo,
-                                recyclerViewArtikel
-                            )
-                            handleErrorState(
-                                tvArtikelNullInfo,
-                                getString(R.string.failed_news)
-                            )
+                        is Result.Success -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    false,
+                                    tvArtikelNullInfo,
+                                    recyclerViewArtikel
+                                )
+                                if (result.data.isEmpty()) {
+                                    showRecyclerView(
+                                        tvArtikelNullInfo,
+                                        recyclerViewArtikel,
+                                        false
+                                    )
+                                } else {
+                                    handleSuccessState(
+                                        result.data,
+                                        recyclerViewArtikel,
+                                        articleAdapter
+                                    )
+                                }
+                            }
+
+                        }
+
+                        is Result.Error -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    false,
+                                    tvArtikelNullInfo,
+                                    recyclerViewArtikel
+                                )
+                                handleErrorState(
+                                    tvArtikelNullInfo,
+                                    getString(R.string.failed_news)
+                                )
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun observeLandData(token: String) {
+        if (view != null) {
+            berandaViewModel.getThreeLands(token).observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarLahanSaya,
+                                    true,
+                                    tvLahanSayaNullInfo,
+                                    recyclerViewLahanSaya
+                                )
+                            }
+                        }
+
+                        is Result.Error -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarLahanSaya,
+                                    false,
+                                    tvLahanSayaNullInfo,
+                                    recyclerViewLahanSaya
+                                )
+                                handleErrorState(
+                                    tvLahanSayaNullInfo,
+                                    getString(R.string.failed_to_load_lands)
+                                )
+                            }
+                        }
+
+                        is Result.Success -> {
+                            with(binding) {
+                                handleLoadingState(
+                                    progressBarLahanSaya,
+                                    false,
+                                    tvLahanSayaNullInfo,
+                                    recyclerViewLahanSaya
+                                )
+                                if (result.data.isEmpty()) {
+                                    showRecyclerView(
+                                        tvLahanSayaNullInfo,
+                                        recyclerViewLahanSaya,
+                                        false
+                                    )
+                                } else {
+                                    handleSuccessState(
+                                        result.data,
+                                        recyclerViewLahanSaya,
+                                        landAdapter
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -140,7 +229,7 @@ class BerandaFragment : Fragment() {
         recyclerView: RecyclerView
     ) {
         showLoading(progressBar, isLoading)
-        showRecyclerView(textView, recyclerView)
+        showRecyclerView(textView, recyclerView, true)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -152,6 +241,9 @@ class BerandaFragment : Fragment() {
         when (adapter) {
             is ArticleAdapter -> {
                 adapter.setListArticle(data as ArrayList<ArticleListItem>)
+            }
+            is LandAdapter -> {
+                adapter.setListLand(data as ArrayList<LahanData>)
             }
         }
         val layoutManager = LinearLayoutManager(requireActivity())
@@ -168,9 +260,15 @@ class BerandaFragment : Fragment() {
         progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun showRecyclerView(textView: TextView, recyclerView: RecyclerView) {
-        textView.visibility = View.GONE
-        recyclerView.visibility = View.VISIBLE
+    private fun showRecyclerView(textView: TextView, recyclerView: RecyclerView, isShow: Boolean) {
+        if (isShow) {
+            textView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        } else {
+            textView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        }
+
     }
 
     override fun onDestroyView() {

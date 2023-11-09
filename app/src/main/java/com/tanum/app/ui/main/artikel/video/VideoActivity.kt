@@ -4,6 +4,7 @@ import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -42,13 +43,16 @@ class VideoActivity : AppCompatActivity() {
                     if (data != null) {
                         adapter.submitData(lifecycle, data)
                     }
+                    if (adapter.itemCount != 0) {
+                        binding.rvListVideo.visibility = View.VISIBLE
+                        binding.tvVideoNullInfo.visibility = View.GONE
+                    }
                     adapter.setOnItemClickCallback(object : VideoPagingAdapter.OnItemClickCallback {
                         override fun onItemClicked(video: VideoData) {
                             val intentToDetail = Intent(this@VideoActivity, VideoDetailActivity::class.java)
                             intentToDetail.putExtra(VideoDetailActivity.EXTRA_URL, video.url)
                             startActivity(intentToDetail)
                         }
-
                     })
                 }
             }

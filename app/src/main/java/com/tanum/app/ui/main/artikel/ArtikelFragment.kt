@@ -89,48 +89,60 @@ class ArtikelFragment : Fragment() {
     }
 
     private fun observeArticleData(token: String) {
-        artikelViewModel.getThreeArticles(token).observe(viewLifecycleOwner) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                true,
-                                tvBeritaNullInfo,
-                                rvListBerita
-                            )
+        if (view != null) {
+            artikelViewModel.getThreeArticles(token).observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    true,
+                                    tvBeritaNullInfo,
+                                    rvListBerita
+                                )
+                            }
                         }
-                    }
-                    is Result.Success -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                false,
-                                tvBeritaNullInfo,
-                                rvListBerita
-                            )
-                            handleSuccessState(
-                                result.data,
-                                rvListBerita,
-                                articleAdapter
-                            )
+                        is Result.Success -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    false,
+                                    tvBeritaNullInfo,
+                                    rvListBerita
+                                )
+                                if (result.data.isEmpty()) {
+                                    showRecyclerView(
+                                        tvBeritaNullInfo,
+                                        rvListBerita,
+                                        false
+                                    )
+                                } else {
+                                    handleSuccessState(
+                                        result.data,
+                                        rvListBerita,
+                                        articleAdapter
+                                    )
+                                }
+                            }
+
+                        }
+                        is Result.Error -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarArtikel,
+                                    false,
+                                    tvBeritaNullInfo,
+                                    rvListBerita
+                                )
+                                handleErrorState(
+                                    tvBeritaNullInfo,
+                                    getString(R.string.failed_news)
+                                )
+                            }
                         }
 
-                    }
-                    is Result.Error -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarArtikel,
-                                false,
-                                tvBeritaNullInfo,
-                                rvListBerita
-                            )
-                            handleErrorState(
-                                tvBeritaNullInfo,
-                                getString(R.string.failed_news)
-                            )
-                        }
+                        else -> {}
                     }
                 }
             }
@@ -138,49 +150,61 @@ class ArtikelFragment : Fragment() {
     }
 
     private fun observeVideoData(token: String) {
-        artikelViewModel.getThreeVideos(token).observe(viewLifecycleOwner) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarVideo,
-                                true,
-                                tvVideoNullInfo,
-                                rvListVideo
-                            )
+        if (view != null) {
+            artikelViewModel.getThreeVideos(token).observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarVideo,
+                                    true,
+                                    tvVideoNullInfo,
+                                    rvListVideo
+                                )
+                            }
+
+                        }
+                        is Result.Success -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarVideo,
+                                    false,
+                                    tvVideoNullInfo,
+                                    rvListVideo
+                                )
+                                if (result.data.isEmpty()) {
+                                    showRecyclerView(
+                                        tvVideoNullInfo,
+                                        rvListVideo,
+                                        false
+                                    )
+                                } else {
+                                    handleSuccessState(
+                                        result.data,
+                                        rvListVideo,
+                                        videoAdapter
+                                    )
+                                }
+                            }
+
+                        }
+                        is Result.Error -> {
+                            with (binding) {
+                                handleLoadingState(
+                                    progressBarVideo,
+                                    false,
+                                    tvVideoNullInfo,
+                                    rvListVideo
+                                )
+                                handleErrorState(
+                                    tvVideoNullInfo,
+                                    getString(R.string.failed_video)
+                                )
+                            }
                         }
 
-                    }
-                    is Result.Success -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarVideo,
-                                false,
-                                tvVideoNullInfo,
-                                rvListVideo
-                            )
-                            handleSuccessState(
-                                result.data,
-                                rvListVideo,
-                                videoAdapter
-                            )
-                        }
-
-                    }
-                    is Result.Error -> {
-                        with (binding) {
-                            handleLoadingState(
-                                progressBarVideo,
-                                false,
-                                tvVideoNullInfo,
-                                rvListVideo
-                            )
-                            handleErrorState(
-                                tvVideoNullInfo,
-                                getString(R.string.failed_video)
-                            )
-                        }
+                        else -> {}
                     }
                 }
             }
@@ -194,7 +218,7 @@ class ArtikelFragment : Fragment() {
         recyclerView: RecyclerView
     ) {
         showLoading(progressBar, isLoading)
-        showRecyclerView(textView, recyclerView)
+        showRecyclerView(textView, recyclerView, true)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -225,9 +249,15 @@ class ArtikelFragment : Fragment() {
         progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun showRecyclerView(textView: TextView, recyclerView: RecyclerView) {
-        textView.visibility = View.GONE
-        recyclerView.visibility = View.VISIBLE
+    private fun showRecyclerView(textView: TextView, recyclerView: RecyclerView, isShow: Boolean) {
+        if (isShow) {
+            textView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        } else {
+            textView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        }
+
     }
 
     override fun onDestroyView() {

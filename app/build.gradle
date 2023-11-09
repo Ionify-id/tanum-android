@@ -32,6 +32,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     buildFeatures {
         viewBinding true
@@ -80,4 +81,10 @@ dependencies {
 
     // espresso
     implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+
+    // room
+    def room_version = "2.6.0"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
 }

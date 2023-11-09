@@ -1,7 +1,13 @@
 package com.tanum.app.data.model
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = "land")
+@Parcelize
 data class LahanData(
 
     @field:SerializedName("area")
@@ -31,6 +37,10 @@ data class LahanData(
     @field:SerializedName("name")
     val name: String,
 
+    @field:SerializedName("plant")
+    val plant: String,
+
+    @PrimaryKey
     @field:SerializedName("id")
     val id: Int,
 
@@ -42,4 +52,4 @@ data class LahanData(
 
     @field:SerializedName("updatedAt")
     val updatedAt: String
-)
+): Parcelable
