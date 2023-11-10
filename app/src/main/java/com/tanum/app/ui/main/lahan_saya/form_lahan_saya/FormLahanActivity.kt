@@ -66,7 +66,7 @@ class FormLahanActivity : AppCompatActivity() {
                             binding.apply {
                                 textInputEditTextLahanSaya.setText(land.name)
                                 textInputEditTextAlamat.setText(land.address)
-                                autoCompleteTextViewKepemilikan.setText(land.ownership)
+                                autoCompleteTextViewKepemilikan.setText(land.ownership, false)
                                 textInputEditTextLuas.setText(land.area.toString())
                                 textInputEditTextTanaman.setText(land.plant)
                                 textInputEditTextVarietas.setText(land.varietas)
@@ -185,16 +185,12 @@ class FormLahanActivity : AppCompatActivity() {
                             getString(R.string.form_need_to_fill), Toast.LENGTH_SHORT).show()
                     } else {
                         landFormViewModel.createLand(token, land).observe(this@FormLahanActivity) { result ->
-                            Log.d("result", "result")
                             if (result != null) {
-                                Log.d("result not null", "result")
                                 when (result) {
                                     is Result.Loading -> {
-                                        Log.d("result loading", "loading")
                                         showLoading(true)
                                     }
                                     is Result.Error -> {
-                                        Log.d("result error", "error")
                                         showLoading(false)
                                         showFailedDialog(
                                             getString(R.string.failed),
