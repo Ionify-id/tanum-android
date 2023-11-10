@@ -177,7 +177,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutLuas">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditVarietas"
+            android:id="@+id/textInputEditTextVarietas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"/>

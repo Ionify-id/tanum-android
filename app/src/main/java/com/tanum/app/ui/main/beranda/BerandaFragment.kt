@@ -1,5 +1,6 @@
 package com.tanum.app.ui.main.beranda
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,6 +37,7 @@ class BerandaFragment : Fragment() {
     private val berandaViewModel: BerandaViewModel by viewModels { factory }
     private lateinit var articleAdapter: ArticleAdapter
     private lateinit var landAdapter: LandAdapter
+    private var listLand = ArrayList<LahanData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,7 +79,7 @@ class BerandaFragment : Fragment() {
         landAdapter.setOnItemClickCallback(object : LandAdapter.OnItemClickCallback {
             override fun onItemClicked(land: LahanData) {
                 val intentToDetail = Intent(requireActivity(), DetailLahanActivity::class.java)
-                intentToDetail.putExtra(DetailLahanActivity.EXTRA_LAND, land)
+                intentToDetail.putExtra(DetailLahanActivity.EXTRA_LAND_ID, land.id)
                 startActivity(intentToDetail)
             }
 
@@ -200,6 +202,7 @@ class BerandaFragment : Fragment() {
                                         recyclerViewLahanSaya,
                                         false
                                     )
+                                    listLand = result.data
                                 } else {
                                     handleSuccessState(
                                         result.data,
@@ -268,7 +271,19 @@ class BerandaFragment : Fragment() {
             textView.visibility = View.VISIBLE
             recyclerView.visibility = View.GONE
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        refreshLahanList()
+    }
+
+    private fun refreshLahanList() {
+        lifecycleScope.launch {
+            berandaViewModel.token.collect { token ->
+                observeLandData(token)
+            }
+        }
     }
 
     override fun onDestroyView() {

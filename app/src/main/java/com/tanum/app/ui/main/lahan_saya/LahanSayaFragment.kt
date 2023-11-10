@@ -2,6 +2,7 @@ package com.tanum.app.ui.main.lahan_saya
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +70,7 @@ class LahanSayaFragment : Fragment() {
                     adapter.setOnItemClickCallback(object : LandPagingAdapter.OnItemClickCallback {
                         override fun onItemClicked(land: LahanData) {
                             val intent = Intent(requireActivity(), DetailLahanActivity::class.java)
-                            intent.putExtra(DetailLahanActivity.EXTRA_LAND, land)
+                            intent.putExtra(DetailLahanActivity.EXTRA_LAND_ID, land.id)
                             startActivity(intent)
                         }
                     })

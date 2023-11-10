@@ -1,15 +1,14 @@
 package com.tanum.app.ui.main.lahan_saya.detail_lahan.aktivitas
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.tanum.app.R
-import com.tanum.app.data.model.LahanData
 import com.tanum.app.databinding.ActivityDetailLahanBinding
 import com.tanum.app.ui.main.MainActivity
 import com.tanum.app.ui.main.lahan_saya.detail_lahan.form_aktivitas.FormAktivitasActivity
@@ -20,7 +19,6 @@ import com.tanum.app.utils.Result
 import com.tanum.app.utils.calculateAge
 import com.tanum.app.utils.getImage
 import com.tanum.app.viewmodels.DetailLahanViewModel
-import com.tanum.app.viewmodels.FormLahanViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -36,46 +34,63 @@ class DetailLahanActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(this)
         binding = ActivityDetailLahanBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val landObject = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(EXTRA_LAND, LahanData::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            intent.getParcelableExtra(EXTRA_LAND)
-        }
+        id = intent.getIntExtra(EXTRA_LAND_ID, 0)
+        setupView()
+        setupAction()
+    }
 
-        if (landObject != null) {
-            id = landObject.id
-            setupView(landObject)
-            setupAction(landObject)
+    private fun setupView() {
+        setupDetailLahanView()
+    }
+
+    private fun setupDetailLahanView() {
+        showLoading(false)
+        lifecycleScope.launch {
+            detailLandViewModel.token.collect { token ->
+                detailLandViewModel.getDetailLand(id, token).collect { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            showLoading(true)
+                        }
+                        is Result.Success -> {
+                            showLoading(false)
+                            val land = result.data
+                            val area = "${land.area}m²"
+                            val dateStart = DateFormatter.formatToFullDateFormat(land.dateStart)
+                            val age = calculateAge(land.dateStart)
+                            binding.apply {
+                                textViewNamaLahan.text = land.name
+                                textViewAlamatLahan.text = land.address
+                                textViewKepelimilikanValue.text = land.ownership
+                                textViewLuasValue.text = area
+                                textViewTanamanValue.text = land.plant
+                                textViewTanggalTanamValue.text = dateStart
+                                textViewVarietasValue.text = land.varietas
+                                textViewUsiaTanamanValue.text = age
+                                textViewTotalBiayaValue.text = land.totalCost.toString()
+                                textViewKeuntunganValue.text = land.profit.toString()
+                                imageViewLahan.setImageResource(getImage(land.image))
+                            }
+                        }
+                        is Result.Error -> {
+                            Log.d("result", "result loading")
+                            showLoading(false)
+                        }
+                    }
+                }
+            }
         }
     }
 
-    private fun setupView(landObject: LahanData) {
-        val area = "${landObject.area}m²"
-        val dateStart = DateFormatter.formatToFullDateFormat(landObject.dateStart)
-        val age = calculateAge(landObject.dateStart)
-        with(binding) {
-            textViewNamaLahan.text = landObject.name
-            textViewAlamatLahan.text = landObject.address
-            textViewKepelimilikanValue.text = landObject.ownership
-            textViewLuasValue.text = area
-            textViewTanamanValue.text = landObject.plant
-            textViewTanggalTanamValue.text = dateStart
-            textViewUsiaTanamanValue.text = age
-            textViewTotalBiayaValue.text = landObject.totalCost.toString()
-            textViewKeuntunganValue.text = landObject.profit.toString()
-            imageViewLahan.setImageResource(getImage(landObject.image))
-        }
-    }
-
-    private fun setupAction(landObject: LahanData) {
+    private fun setupAction() {
         binding.buttonTambahkanAktivitas.setOnClickListener {
             val intent = Intent(this@DetailLahanActivity, FormAktivitasActivity::class.java)
+            intent.putExtra(FormAktivitasActivity.EXTRA_LAND_ID, id)
             startActivity(intent)
         }
         binding.buttonEditDetailLahan.setOnClickListener {
             val intent = Intent(this@DetailLahanActivity, FormLahanActivity::class.java)
-            intent.putExtra(FormLahanActivity.EXTRA_LAHAN, landObject)
+            intent.putExtra(FormLahanActivity.EXTRA_LAND_ID, id)
             startActivity(intent)
         }
         binding.buttonBack.setOnClickListener {
@@ -85,29 +100,26 @@ class DetailLahanActivity : AppCompatActivity() {
             AlertDialogHelper.showCompleteAlertDialog(this@DetailLahanActivity, "Hapus lahan", "Apakah anda yakin ingin menghapus lahan", "Yakin", "Tidak") {
                 lifecycleScope.launch {
                     detailLandViewModel.token.collect { token ->
-                        detailLandViewModel.deleteLand(token, id).observe(this@DetailLahanActivity) { result ->
+                        detailLandViewModel.deleteLand(id, token).observe(this@DetailLahanActivity) { result ->
                             if (result != null) {
                                 when (result) {
                                     is Result.Loading -> {
                                         showLoading(true)
                                     }
-
-                                    is Result.Error -> {
-                                        showLoading(false)
-                                        Toast.makeText(this@DetailLahanActivity,
-                                            getString(R.string.failed_delete_land), Toast.LENGTH_SHORT).show()
-                                    }
-
                                     is Result.Success -> {
                                         showLoading(false)
                                         Toast.makeText(this@DetailLahanActivity,
                                             getString(R.string.success_delete_land), Toast.LENGTH_SHORT).show()
-
                                         val intent = Intent(this@DetailLahanActivity, MainActivity::class.java)
                                         intent.putExtra(MainActivity.EXTRA_LAHAN_SAYA, true)
                                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                         startActivity(intent)
                                         finish()
+                                    }
+                                    is Result.Error -> {
+                                        showLoading(false)
+                                        Toast.makeText(this@DetailLahanActivity,
+                                            getString(R.string.failed_delete_land), Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             }
@@ -122,7 +134,12 @@ class DetailLahanActivity : AppCompatActivity() {
         if (isLoading) binding.progressBar.visibility = View.VISIBLE else binding.progressBar.visibility = View.GONE
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupDetailLahanView()
+    }
+
     companion object {
-        const val EXTRA_LAND = "extra_land"
+        const val EXTRA_LAND_ID = "extra_land_id"
     }
 }

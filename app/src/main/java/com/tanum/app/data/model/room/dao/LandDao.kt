@@ -13,7 +13,7 @@ interface LandDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLand(land: List<LahanData>)
 
-    @Query("SELECT * FROM land ORDER BY createdAt DESC")
+    @Query("SELECT * FROM land ORDER BY updatedAt DESC")
     fun getAllLand(): PagingSource<Int, LahanData>
 
     @Query("DELETE FROM land")

@@ -54,7 +54,7 @@ class ArticleRepository(
                 initialLoadSize = 5
             ),
             pagingSourceFactory = {
-                ArticlePagingSource(apiService, token)
+                ArticlePagingSource(apiService, "Bearer $token")
             }
         ).liveData
     }
@@ -111,7 +111,7 @@ class ArticleRepository(
                 initialLoadSize = 5
             ),
             pagingSourceFactory = {
-                VideoPagingSource(apiService, token)
+                VideoPagingSource(apiService, "Bearer $token")
             }
         ).liveData
     }

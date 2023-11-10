@@ -2,6 +2,7 @@ package com.tanum.app.data.model
 
 import com.google.gson.annotations.SerializedName
 
+
 data class Meta(
 
     @field:SerializedName("code")

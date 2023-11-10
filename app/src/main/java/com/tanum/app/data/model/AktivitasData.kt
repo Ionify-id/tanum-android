@@ -1,30 +1,33 @@
 package com.tanum.app.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class AktivitasData(
 
     @field:SerializedName("createdAt")
-    val createdAt: String? = null,
+    val createdAt: String,
 
     @field:SerializedName("landId")
-    val landId: Int? = null,
+    val landId: Int,
 
     @field:SerializedName("cost")
-    val cost: Int? = null,
+    val cost: Int,
 
     @field:SerializedName("dateAction")
-    val dateAction: String? = null,
+    val dateAction: String,
 
     @field:SerializedName("action")
-    val action: Int? = null,
+    val action: String,
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @field:SerializedName("category")
-    val category: Int? = null,
+    val category: String,
 
     @field:SerializedName("updatedAt")
-    val updatedAt: String? = null
-)
+    val updatedAt: String
+): Parcelable

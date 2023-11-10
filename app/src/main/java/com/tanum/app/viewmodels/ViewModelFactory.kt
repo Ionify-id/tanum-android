@@ -3,6 +3,7 @@ package com.tanum.app.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.tanum.app.data.repository.ActivityRepository
 import com.tanum.app.data.repository.ArticleRepository
 import com.tanum.app.data.repository.LandRepository
 import com.tanum.app.data.repository.UserRepository
@@ -12,7 +13,8 @@ import com.tanum.app.di.Injection
 class ViewModelFactory private constructor(
     private val userRepository: UserRepository,
     private val articleRepository: ArticleRepository,
-    private val landRepository: LandRepository
+    private val landRepository: LandRepository,
+    private val activityRepository: ActivityRepository
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -28,6 +30,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(FormLahanViewModel::class.java) -> FormLahanViewModel(userRepository, landRepository) as T
             modelClass.isAssignableFrom(LahanSayaViewModel::class.java) -> LahanSayaViewModel(userRepository, landRepository) as T
             modelClass.isAssignableFrom(DetailLahanViewModel::class.java) -> DetailLahanViewModel(userRepository, landRepository) as T
+            modelClass.isAssignableFrom(FormAktivitasViewModel::class.java) -> FormAktivitasViewModel(userRepository, activityRepository) as T
              else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -40,7 +43,8 @@ class ViewModelFactory private constructor(
                 instance ?: ViewModelFactory(
                     Injection.provideUserRepository(context),
                     Injection.provideArticleRepository(),
-                    Injection.provideLandRepository(context)
+                    Injection.provideLandRepository(context),
+                    Injection.provideActivityRepository(context)
                 )
             }.also { instance = it }
     }

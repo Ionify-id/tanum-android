@@ -11,14 +11,19 @@ class DetailLahanViewModel(
 ): ViewModel() {
     val token: Flow<String> = userRepository.getToken()
 
+    fun getDetailLand(
+        id: Int,
+        token: String
+    ) = landRepository.getDetailLand(id, token)
+
     fun deleteLand(
-        token: String,
-        id: Int
+        id: Int,
+        token: String
     ) = landRepository.deleteLand(id, token)
 
     fun getAllActivities(
-        token: String,
-        landId: Int
+        landId: Int,
+        token: String
     ) {
 
     }

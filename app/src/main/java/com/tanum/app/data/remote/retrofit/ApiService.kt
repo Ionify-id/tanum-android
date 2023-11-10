@@ -7,6 +7,8 @@ import com.tanum.app.data.model.body.RegisterBody
 import com.tanum.app.data.remote.response.AktivitasResponse
 import com.tanum.app.data.remote.response.ArtikelResponse
 import com.tanum.app.data.remote.response.DeleteResponse
+import com.tanum.app.data.remote.response.DetailAktivitasResponse
+import com.tanum.app.data.remote.response.DetailLahanResponse
 import com.tanum.app.data.remote.response.LahanResponse
 import com.tanum.app.data.remote.response.ListAktivitasResponse
 import com.tanum.app.data.remote.response.ListArtikelResponse
@@ -75,6 +77,13 @@ interface ApiService {
         @Query("take") take: Int
     ): ListLahanResponse
 
+    // get detail lahan
+    @GET("lands/{id}")
+    suspend fun getDetailLand(
+        @Path("id") id: Int,
+        @Header("Authorization") auth: String
+    ): DetailLahanResponse
+
     // delete lahan
     @DELETE("lands/{id}")
     suspend fun deleteLand(
@@ -110,6 +119,12 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("take") take: Int
     ): ListAktivitasResponse
+
+    @GET("activities/detail/{activityId}")
+    suspend fun getDetailActivities(
+        @Path("{activityId}") activityId: Int,
+        @Header("Authorization") auth: String
+    ): DetailAktivitasResponse
 
     // delete activity
     @DELETE("activities/{activityId}")

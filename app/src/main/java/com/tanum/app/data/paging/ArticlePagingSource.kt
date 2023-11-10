@@ -27,7 +27,7 @@ class ArticlePagingSource(
 
             val position = params.key ?: INITIAL_PAGE_INDEX
 
-            val responseData = apiService.getListArticles("Bearer $token", position, params.loadSize).data
+            val responseData = apiService.getListArticles(token, position, params.loadSize).data
 
             LoadResult.Page(
                 data = responseData,

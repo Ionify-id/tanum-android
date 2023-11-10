@@ -1,5 +1,6 @@
 package com.tanum.app.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.paging.ExperimentalPagingApi
@@ -10,12 +11,13 @@ import androidx.paging.liveData
 import com.tanum.app.data.model.LahanData
 import com.tanum.app.data.model.body.LahanBody
 import com.tanum.app.data.model.room.TanumDatabase
-import com.tanum.app.data.model.room.entity.LandEntity
 import com.tanum.app.data.paging.LandRemoteMediator
 import com.tanum.app.data.remote.retrofit.ApiService
 import com.tanum.app.utils.Result
 import com.tanum.app.utils.handleCatchError
 import com.tanum.app.utils.wrapEspressoIdlingResource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class LandRepository(
     private val apiService: ApiService,
@@ -96,8 +98,34 @@ class LandRepository(
             remoteMediator = LandRemoteMediator(landDatabase, apiService, "Bearer $token"),
             pagingSourceFactory = {
                 landDatabase.landDao().getAllLand()
+//                LandPagingSource(apiService, token)
             }
         ).liveData
+    }
+
+    fun getDetailLand(
+        id: Int,
+        token: String
+    ): Flow<Result<LahanData>> = flow {
+        Log.d("emit result", "loading")
+        emit(Result.Loading)
+
+        wrapEspressoIdlingResource {
+            try {
+                Log.d("request response", "request")
+                val response = apiService.getDetailLand(id, "Bearer $token")
+                Log.d("after request", "request")
+                if (response.meta.code == 200) {
+                    Log.d("emit result", "loading")
+                    emit(Result.Success(response.data))
+                } else {
+                    Log.d("emit result", "loading")
+                    emit(Result.Error(response.meta.message))
+                }
+            } catch (e: Exception) {
+                handleCatchError(e)
+            }
+        }
     }
 
     fun deleteLand(

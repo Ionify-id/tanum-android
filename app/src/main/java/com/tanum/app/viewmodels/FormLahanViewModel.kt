@@ -23,5 +23,8 @@ class FormLahanViewModel(
         landBody: LahanBody
     ) = landRepository.editLand(id, token, landBody)
 
-
+    fun getDetailLand(
+        id: Int,
+        token: String
+    ) = landRepository.getDetailLand(id, token)
 }

@@ -7,6 +7,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.tanum.app.data.UserPreference
 import com.tanum.app.data.model.room.TanumDatabase
 import com.tanum.app.data.remote.retrofit.RetrofitConfig
+import com.tanum.app.data.repository.ActivityRepository
 import com.tanum.app.data.repository.ArticleRepository
 import com.tanum.app.data.repository.LandRepository
 import com.tanum.app.data.repository.UserRepository
@@ -29,5 +30,10 @@ object Injection  {
         val apiService = RetrofitConfig.getApiService()
         val database = TanumDatabase.getDatabase(context)
         return LandRepository.getInstance(apiService, database)
+    }
+
+    fun provideActivityRepository(context: Context): ActivityRepository {
+        val apiService = RetrofitConfig.getApiService()
+        return ActivityRepository.getInstance(apiService)
     }
 }
