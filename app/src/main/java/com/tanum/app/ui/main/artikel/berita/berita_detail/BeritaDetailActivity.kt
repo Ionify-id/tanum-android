@@ -37,32 +37,30 @@ class BeritaDetailActivity : AppCompatActivity() {
             val id = intent.getIntExtra(EXTRA_ID, 0)
             beritaDetailViewModel.token.collect { token ->
                 beritaDetailViewModel.getArticleDetail(token, id).collect { result ->
-                    if (result != null) {
-                        when (result) {
-                            is Result.Loading -> {
-                                showLoading(true)
+                    when (result) {
+                        is Result.Loading -> {
+                            showLoading(true)
+                        }
+                        is Result.Success -> {
+                            showLoading(false)
+                            val news = result.data
+                            with(binding) {
+                                tvBeritaTitle.text = news.title
+                                val styledText = HtmlCompat.fromHtml(news.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                                tvBeritaIsi.text = styledText
+                                Glide.with(this@BeritaDetailActivity)
+                                    .load(news.thumbnail)
+                                    .into(ivBerita)
                             }
-                            is Result.Success -> {
-                                showLoading(false)
-                                val news = result.data
-                                with(binding) {
-                                    tvBeritaTitle.text = news.title
-                                    val styledText = HtmlCompat.fromHtml(news.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
-                                    tvBeritaIsi.text = styledText
-                                    Glide.with(this@BeritaDetailActivity)
-                                        .load(news.thumbnail)
-                                        .into(ivBerita)
-                                }
-                            }
-                            is Result.Error -> {
-                                showLoading(false)
-                                AlertDialogHelper.showAlertDialogPositive(
-                                    this@BeritaDetailActivity,
-                                    getString(R.string.failed),
-                                    getString(R.string.failed_news),
-                                    getString(R.string.next)
-                                ) {}
-                            }
+                        }
+                        is Result.Error -> {
+                            showLoading(false)
+                            AlertDialogHelper.showAlertDialogPositive(
+                                this@BeritaDetailActivity,
+                                getString(R.string.failed),
+                                getString(R.string.failed_news),
+                                getString(R.string.next)
+                            ) {}
                         }
                     }
                 }

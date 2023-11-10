@@ -1,48 +1,219 @@
 package com.tanum.app.ui.main.lahan_saya.form_lahan_saya
 
-import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
+import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.MaterialToolbar
 import com.tanum.app.R
+import com.tanum.app.data.model.body.LahanBody
 import com.tanum.app.databinding.ActivityFormLahanBinding
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import com.tanum.app.ui.main.MainActivity
+import com.tanum.app.ui.main.lahan_saya.detail_lahan.aktivitas.DetailLahanActivity
+import com.tanum.app.utils.AlertDialogHelper
+import com.tanum.app.utils.DateFormatter
+import com.tanum.app.utils.DatePickerHelper
+import com.tanum.app.utils.Result
+import com.tanum.app.utils.getRandomNumber
+import com.tanum.app.viewmodels.FormLahanViewModel
+import com.tanum.app.viewmodels.ViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class FormLahanActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormLahanBinding
-    private val calendar = Calendar.getInstance()
+    private lateinit var factory: ViewModelFactory
+    private val landFormViewModel: FormLahanViewModel by viewModels { factory }
+    private var image = ""
+    private var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        factory = ViewModelFactory.getInstance(this@FormLahanActivity)
         binding = ActivityFormLahanBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupActionBar(binding.toolbar)
-        setupAction()
+        id = intent.getIntExtra(EXTRA_LAND_ID, 0)
+        if (id != 0) {
+            setupEditView()
+            setupEditAction()
+        } else {
+            setupCreateAction()
+        }
     }
 
-    private fun setupAction() {
-        setupDropdown()
-        binding.textInputEditTanggal.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, month: Int, day: Int ->
+    private fun setupEditView() {
+        showLoading(false)
+        lifecycleScope.launch {
+            landFormViewModel.token.collect { token ->
+                landFormViewModel.getDetailLand(id, token).collect { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            showLoading(true)
+                        }
+                        is Result.Success -> {
+                            showLoading(false)
+                            val land = result.data
+                            image = land.image
+                            binding.apply {
+                                textInputEditTextLahanSaya.setText(land.name)
+                                textInputEditTextAlamat.setText(land.address)
+                                autoCompleteTextViewKepemilikan.setText(land.ownership, false)
+                                textInputEditTextLuas.setText(land.area.toString())
+                                textInputEditTextTanaman.setText(land.plant)
+                                textInputEditTextVarietas.setText(land.varietas)
+                                textInputEditTanggal.setText(DateFormatter.formatToFullDateFormat(land.dateStart))
+                            }
+                        }
+                        is Result.Error -> {
+                            showLoading(false)
+                            Toast.makeText(this@FormLahanActivity,
+                                getString(R.string.failed_to_load_land_detail), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, day)
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("id", "ID"))
-                val formattedDate = dateFormat.format(selectedDate.time)
-                binding.textInputEditTanggal.setText(formattedDate)
-            },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datePickerDialog.show()
+    private fun setupEditAction() {
+        setupDropdown()
+        var dateStart = ""
+        binding.textInputEditTanggal.setOnClickListener {
+            DatePickerHelper.showDatePickerDialog(this, null) { selectedDate ->
+                binding.textInputEditTanggal.setText(selectedDate)
+            }
+        }
+        showLoading(false)
+        lifecycleScope.launch {
+            landFormViewModel.token.collect { token ->
+                var land: LahanBody
+                var landName: String
+                var address: String
+                var ownership: String
+                var area: Int
+                var plant: String
+                var varietas: String
+                binding.buttonSimpan.setOnClickListener {
+                    binding.apply {
+                        landName = textInputEditTextLahanSaya.text.toString()
+                        address = textInputEditTextAlamat.text.toString()
+                        ownership = autoCompleteTextViewKepemilikan.text.toString()
+                        val textArea = textInputEditTextLuas.text.toString()
+                        area = if (textArea.isEmpty()) 0 else textArea.toIntOrNull() ?: 0
+                        plant = textInputEditTextTanaman.text.toString()
+                        varietas = textInputEditTextVarietas.text.toString()
+                        dateStart = textInputEditTanggal.text.toString()
+                        land = LahanBody( landName, address, ownership, area, plant, varietas, dateStart, image)
+                    }
+                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0 || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
+                        Toast.makeText(this@FormLahanActivity,
+                            getString(R.string.form_need_to_fill), Toast.LENGTH_SHORT).show()
+                    } else {
+                        landFormViewModel.editLand(id, token, land).observe(this@FormLahanActivity) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is Result.Loading -> {
+                                        showLoading(true)
+                                    }
+                                    is Result.Error -> {
+                                        showLoading(false)
+                                        showFailedDialog(
+                                            getString(R.string.failed),
+                                            result.error,
+                                            getString(R.string.next)
+                                        )
+                                    }
+                                    is Result.Success -> {
+                                        showLoading(false)
+                                        showSuccessDialog(
+                                            getString(R.string.success),
+                                            getString(R.string.land_edit_success),
+                                            getString(R.string.next),
+                                            "edit"
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupCreateAction() {
+        setupDropdown()
+        var dateStart = ""
+        binding.textInputEditTanggal.setOnClickListener {
+            DatePickerHelper.showDatePickerDialog(this, null) { selectedDate ->
+                binding.textInputEditTanggal.setText(selectedDate)
+                dateStart = DateFormatter.formatToZFormat(selectedDate)
+            }
+        }
+        showLoading(false)
+        lifecycleScope.launch {
+            landFormViewModel.token.collect { token ->
+                var land: LahanBody
+                var landName: String
+                var address: String
+                var ownership: String
+                var area: Int
+                var plant: String
+                var varietas: String
+                binding.buttonSimpan.setOnClickListener {
+                    binding.apply {
+                        landName = textInputEditTextLahanSaya.text.toString()
+                        address = textInputEditTextAlamat.text.toString()
+                        ownership = autoCompleteTextViewKepemilikan.text.toString()
+                        val textArea = textInputEditTextLuas.text.toString()
+                        area = if (textArea.isEmpty()) 0 else textArea.toIntOrNull() ?: 0
+                        plant = textInputEditTextTanaman.text.toString()
+                        varietas = textInputEditTextVarietas.text.toString()
+                        land = LahanBody( landName, address, ownership, area, plant, varietas, dateStart, getRandomNumber())
+                    }
+                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0 || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
+                        Toast.makeText(this@FormLahanActivity,
+                            getString(R.string.form_need_to_fill), Toast.LENGTH_SHORT).show()
+                    } else {
+                        landFormViewModel.createLand(token, land).observe(this@FormLahanActivity) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is Result.Loading -> {
+                                        showLoading(true)
+                                    }
+                                    is Result.Error -> {
+                                        showLoading(false)
+                                        showFailedDialog(
+                                            getString(R.string.failed),
+                                            result.error,
+                                            getString(R.string.next)
+                                        )
+                                    }
+                                    is Result.Success -> {
+                                        Log.d("result success", "success")
+                                        showLoading(false)
+                                        showSuccessDialog(
+                                            getString(R.string.success),
+                                            result.data,
+                                            getString(R.string.next),
+                                            "create"
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -66,5 +237,61 @@ class FormLahanActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showSuccessDialog(
+        title: String,
+        message: String,
+        positiveButtonLabel: String,
+        action: String
+    ) {
+        AlertDialogHelper.showAlertDialogPositive(
+            this@FormLahanActivity,
+            title,
+            message,
+            positiveButtonLabel
+        ) {
+            formAction(action)
+        }
+    }
+
+    private fun formAction(action: String) {
+        when (action) {
+            "create" -> {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra(MainActivity.EXTRA_LAHAN_SAYA, true)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                finish()
+            }
+            "edit" -> {
+                val intent = Intent(this@FormLahanActivity, DetailLahanActivity::class.java)
+                intent.putExtra(DetailLahanActivity.EXTRA_LAND_ID, id)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+            }
+
+        }
+    }
+
+    private fun showFailedDialog(
+        title: String,
+        message: String,
+        positiveButtonLabel: String
+    ) {
+        AlertDialogHelper.showAlertDialogPositive(
+            this@FormLahanActivity,
+            title,
+            message,
+            positiveButtonLabel
+        ) {}
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EXTRA_LAND_ID = "extra_land_id"
     }
 }

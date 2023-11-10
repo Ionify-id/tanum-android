@@ -28,11 +28,23 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tvVideoNullInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="@string/video_null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListVideo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="24dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"

@@ -9,10 +9,9 @@ import com.tanum.app.data.model.body.LoginBody
 import com.tanum.app.data.model.body.RegisterBody
 import com.tanum.app.data.remote.retrofit.ApiService
 import com.tanum.app.utils.Result
-import com.tanum.app.utils.convertErrorResponse
+import com.tanum.app.utils.handleCatchError
 import com.tanum.app.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
 
 class UserRepository private constructor(
     private val apiService: ApiService,
@@ -37,16 +36,7 @@ class UserRepository private constructor(
 
                 emit(Result.Success(response.meta.message))
             } catch (e: Exception) {
-                when(e) {
-                    is HttpException -> {
-                        val jsonRes = convertErrorResponse(e.response()?.errorBody()?.string())
-                        val msg =jsonRes.message
-                        emit(Result.Error(msg))
-                    }
-                    else -> {
-                        emit(Result.Error(e.message.toString()))
-                    }
-                }
+                handleCatchError(e)
             }
         }
     }
@@ -69,16 +59,7 @@ class UserRepository private constructor(
                     emit(Result.Error(msg))
                 }
             } catch (e: Exception) {
-                when(e) {
-                    is HttpException -> {
-                        val jsonRes = convertErrorResponse(e.response()?.errorBody()?.string())
-                        val msg =jsonRes.message
-                        emit(Result.Error(msg))
-                    }
-                    else -> {
-                        emit(Result.Error(e.message.toString()))
-                    }
-                }
+                handleCatchError(e)
             }
         }
     }

@@ -25,12 +25,12 @@ class VideoPagingSource(
         return try {
 
             val position = params.key ?: INITIAL_PAGE_INDEX
-            val responseData = apiService.getListVideo("Bearer $token", position, params.loadSize).data
+            val responseData = apiService.getListVideo(token, position, params.loadSize).data
 
             LoadResult.Page(
                 data = responseData,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-                nextKey = if (responseData.isNullOrEmpty()) null else position + 1
+                nextKey = if (responseData.isEmpty()) null else position + 1
             )
 
         } catch (e: Exception) {

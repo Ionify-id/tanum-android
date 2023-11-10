@@ -5,7 +5,8 @@ data class LahanBody(
     val address: String?,
     val ownership: String?,
     val area: Int?,
-    val variety: String?,
+    val plant: String?,
+    val varietas: String?,
     val dateStart: String?,
     val image: String?
 )

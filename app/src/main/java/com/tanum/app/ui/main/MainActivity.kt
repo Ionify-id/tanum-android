@@ -35,13 +35,21 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { controller, destination, _ ->
+        val openLahanSaya = intent.getBooleanExtra(EXTRA_LAHAN_SAYA, false)
+        if (openLahanSaya) {
+            navView.selectedItemId = R.id.navigation_lahan_saya
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.navigation_beranda) {
                 supportActionBar?.hide()
             } else {
                 supportActionBar?.show()
             }
         }
+    }
 
+    companion object {
+        const val EXTRA_LAHAN_SAYA = "extra_lahan_saya"
     }
 }

@@ -28,15 +28,12 @@ class ProfilFragment : Fragment() {
     ): View {
         factory = ViewModelFactory.getInstance(requireActivity())
         _binding = FragmentProfilBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        setupView()
-
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
         setupAction()
     }
 
@@ -45,7 +42,7 @@ class ProfilFragment : Fragment() {
             profilViewModel.logout()
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
-            activity?.finish()
+            requireActivity().finish()
         }
     }
 

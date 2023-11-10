@@ -50,7 +50,7 @@ class ArticlePagingAdapter: PagingDataAdapter<ArticleListItem, ArticlePagingAdap
         this.onItemClickCallback = onItemClickCallback
     }
 
-    companion object {
+    private companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleListItem>() {
             override fun areItemsTheSame(oldItem: ArticleListItem, newItem: ArticleListItem): Boolean {
                 return oldItem.id == newItem.id

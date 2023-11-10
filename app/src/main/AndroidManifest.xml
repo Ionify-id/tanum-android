@@ -33,7 +33,7 @@
             android:name=".ui.main.lahan_saya.detail_lahan.form_aktivitas.FormAktivitasActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.lahan_saya.detail_lahan.aktivitas.AktivitasActivity"
+            android:name=".ui.main.lahan_saya.detail_lahan.aktivitas.DetailLahanActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.lahan_saya.form_lahan_saya.FormLahanActivity"

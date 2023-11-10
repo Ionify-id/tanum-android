@@ -1,5 +1,6 @@
 package com.tanum.app.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.tanum.app.data.model.body.AktivitasBody
@@ -21,7 +22,7 @@ class ActivityRepository(
 
         wrapEspressoIdlingResource {
             try {
-                val response = apiService.createActivity(landId, token, aktivitasBody)
+                val response = apiService.createActivity(landId, "Bearer $token", aktivitasBody)
                 val msg = response.meta.message
                 if (response.meta.code == 201) {
                     emit(Result.Success(msg))
@@ -43,7 +44,7 @@ class ActivityRepository(
 
         wrapEspressoIdlingResource {
             try {
-                val response = apiService.editActivity(activityId, token, aktivitasBody)
+                val response = apiService.editActivity(activityId, "Bearer $token", aktivitasBody)
                 val msg = response.meta.message
                 if (response.meta.code == 201) {
                     emit(Result.Success(msg))
@@ -65,7 +66,7 @@ class ActivityRepository(
 
         wrapEspressoIdlingResource {
             try {
-                val response = apiService.deleteActivity(activityId, token)
+                val response = apiService.deleteActivity(activityId, "Bearer $token")
                 val msg = response.meta.message
                 if (response.meta.code == 201) {
                     emit(Result.Success(msg))
