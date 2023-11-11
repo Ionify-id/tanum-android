@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.lahan_saya.detail_lahan.aktivitas.DetailLahanActivity">
+    tools:context=".view.main.lahan_saya.detail_lahan.aktivitas.DetailLahanActivity">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,7 +1,7 @@
 package com.tanum.app.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.tanum.app.data.model.VideoData
+import com.tanum.app.model.data.VideoData
 
 class VideoDiffCallback(
     private val oldVideoList: ArrayList<VideoData>,

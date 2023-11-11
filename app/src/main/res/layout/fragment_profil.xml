@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:paddingHorizontal="24dp"
     android:paddingTop="24dp"
-    tools:context=".ui.main.profil.ProfilFragment">
+    tools:context=".view.main.profil.ProfilFragment">
 
     <TextView
         android:id="@+id/tvNamaLengkap"

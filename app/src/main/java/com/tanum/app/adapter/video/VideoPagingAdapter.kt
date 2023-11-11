@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.tanum.app.data.model.VideoData
+import com.tanum.app.model.data.VideoData
 import com.tanum.app.databinding.ItemVideoBinding
 
 class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoPagingViewHolder>(

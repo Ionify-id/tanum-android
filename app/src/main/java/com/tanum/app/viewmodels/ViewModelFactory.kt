@@ -3,10 +3,10 @@ package com.tanum.app.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.tanum.app.data.repository.ActivityRepository
-import com.tanum.app.data.repository.ArticleRepository
-import com.tanum.app.data.repository.LandRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.repository.ActivityRepository
+import com.tanum.app.model.repository.ArticleRepository
+import com.tanum.app.model.repository.LandRepository
+import com.tanum.app.model.repository.UserRepository
 import com.tanum.app.di.Injection
 
 @Suppress("UNCHECKED_CAST")

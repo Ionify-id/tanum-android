@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tanum.app.data.model.AktivitasData
-import com.tanum.app.data.model.LahanData
+import com.tanum.app.model.data.AktivitasData
 import com.tanum.app.databinding.ItemActivityBinding
 import com.tanum.app.utils.DateFormatter
 

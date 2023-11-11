@@ -1,9 +1,9 @@
 package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.tanum.app.data.model.body.AktivitasBody
-import com.tanum.app.data.repository.ActivityRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.data.body.AktivitasBody
+import com.tanum.app.model.repository.ActivityRepository
+import com.tanum.app.model.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
 class FormAktivitasViewModel(

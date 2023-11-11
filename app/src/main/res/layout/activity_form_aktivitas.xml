@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.lahan_saya.detail_lahan.form_aktivitas.FormAktivitasActivity">
+    tools:context=".view.main.lahan_saya.detail_lahan.form_aktivitas.FormAktivitasActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

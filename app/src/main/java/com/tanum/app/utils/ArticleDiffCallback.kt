@@ -1,7 +1,7 @@
 package com.tanum.app.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.tanum.app.data.remote.response.ArticleListItem
+import com.tanum.app.model.remote.response.ArticleListItem
 
 class ArticleDiffCallback(
     private val oldArticleList: ArrayList<ArticleListItem>,

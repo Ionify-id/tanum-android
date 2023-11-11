@@ -3,9 +3,9 @@ package com.tanum.app.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.tanum.app.data.repository.ActivityRepository
-import com.tanum.app.data.repository.LandRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.repository.ActivityRepository
+import com.tanum.app.model.repository.LandRepository
+import com.tanum.app.model.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
 class DetailLahanViewModel(

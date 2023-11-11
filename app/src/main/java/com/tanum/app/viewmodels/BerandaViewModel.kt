@@ -1,12 +1,9 @@
 package com.tanum.app.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tanum.app.data.remote.response.ArticleListItem
-import com.tanum.app.data.repository.ArticleRepository
-import com.tanum.app.data.repository.LandRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.repository.ArticleRepository
+import com.tanum.app.model.repository.LandRepository
+import com.tanum.app.model.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
 class BerandaViewModel(

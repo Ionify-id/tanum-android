@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.tanum.app.data.remote.response.ArticleListItem
+import com.tanum.app.model.remote.response.ArticleListItem
 import com.tanum.app.databinding.ItemArticleBinding
 
 class ArticlePagingAdapter: PagingDataAdapter<ArticleListItem, ArticlePagingAdapter.ArticlePagingViewHolder>(

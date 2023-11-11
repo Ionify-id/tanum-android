@@ -1,8 +1,8 @@
 package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.tanum.app.data.repository.ArticleRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.repository.ArticleRepository
+import com.tanum.app.model.repository.UserRepository
 
 class BeritaDetailViewModel(
     private val userRepository: UserRepository,

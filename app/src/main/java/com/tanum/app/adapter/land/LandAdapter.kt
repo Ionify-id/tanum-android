@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tanum.app.adapter.article.ArticleAdapter
-import com.tanum.app.data.model.LahanData
-import com.tanum.app.data.remote.response.ArticleListItem
+import com.tanum.app.model.data.LahanData
 import com.tanum.app.databinding.ItemLandBinding
 import com.tanum.app.utils.LandDiffCallback
 import com.tanum.app.utils.calculateAge

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="24dp"
     android:background="@color/white"
-    tools:context=".ui.main.lahan_saya.LahanSayaFragment">
+    tools:context=".view.main.lahan_saya.LahanSayaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLands"

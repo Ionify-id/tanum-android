@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tanum.app.data.model.LahanData
+import com.tanum.app.model.data.LahanData
 import com.tanum.app.databinding.ItemLandBinding
 import com.tanum.app.utils.calculateAge
 import com.tanum.app.utils.getImage

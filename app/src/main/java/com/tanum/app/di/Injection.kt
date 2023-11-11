@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.tanum.app.data.UserPreference
-import com.tanum.app.data.model.room.TanumDatabase
-import com.tanum.app.data.remote.retrofit.RetrofitConfig
-import com.tanum.app.data.repository.ActivityRepository
-import com.tanum.app.data.repository.ArticleRepository
-import com.tanum.app.data.repository.LandRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.UserPreference
+import com.tanum.app.model.data.room.TanumDatabase
+import com.tanum.app.model.remote.retrofit.RetrofitConfig
+import com.tanum.app.model.repository.ActivityRepository
+import com.tanum.app.model.repository.ArticleRepository
+import com.tanum.app.model.repository.LandRepository
+import com.tanum.app.model.repository.UserRepository
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 

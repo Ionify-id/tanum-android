@@ -1,7 +1,7 @@
 package com.tanum.app.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.tanum.app.data.model.LahanData
+import com.tanum.app.model.data.LahanData
 
 class LandDiffCallback(
     private val oldLandList: ArrayList<LahanData>,

@@ -2,11 +2,10 @@ package com.tanum.app.utils
 
 import android.content.Context
 import android.app.DatePickerDialog
-import android.icu.text.AlphabeticIndex.Bucket.LabelType
 import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import com.tanum.app.R
-import com.tanum.app.data.remote.response.ErrorResponse
+import com.tanum.app.model.remote.response.ErrorResponse
 import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.time.Instant

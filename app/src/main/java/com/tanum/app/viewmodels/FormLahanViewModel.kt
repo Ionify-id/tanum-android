@@ -1,9 +1,9 @@
 package com.tanum.app.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.tanum.app.data.model.body.LahanBody
-import com.tanum.app.data.repository.LandRepository
-import com.tanum.app.data.repository.UserRepository
+import com.tanum.app.model.data.body.LahanBody
+import com.tanum.app.model.repository.LandRepository
+import com.tanum.app.model.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
 class FormLahanViewModel(
