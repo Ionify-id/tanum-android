@@ -3,6 +3,7 @@ package com.tanum.app.ui.main.artikel.berita
 import android.R.id.home
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -35,14 +36,12 @@ class BeritaActivity : AppCompatActivity() {
     private fun setupView() {
         lifecycleScope.launch {
             val adapter = ArticlePagingAdapter()
-            binding.rvListBerita.layoutManager = LinearLayoutManager(this@BeritaActivity)
-            binding.rvListBerita.adapter = adapter
             beritaViewModel.token.collect { token ->
                 beritaViewModel.getListArticle(token).observe(this@BeritaActivity) { data ->
                     if (data != null) {
                         adapter.submitData(lifecycle, data)
-                    }
-                    if (adapter.itemCount != 0) {
+                        binding.rvListBerita.layoutManager = LinearLayoutManager(this@BeritaActivity)
+                        binding.rvListBerita.adapter = adapter
                         binding.rvListBerita.visibility = View.VISIBLE
                         binding.tvBeritaNullInfo.visibility = View.GONE
                     }

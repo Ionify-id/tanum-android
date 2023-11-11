@@ -36,14 +36,13 @@ class VideoActivity : AppCompatActivity() {
     private fun setupView() {
         lifecycleScope.launch {
             val adapter = VideoPagingAdapter()
-            binding.rvListVideo.layoutManager = LinearLayoutManager(this@VideoActivity)
-            binding.rvListVideo.adapter = adapter
+
             videoViewModel.token.collect { token ->
                 videoViewModel.getListVideo(token).observe(this@VideoActivity) { data ->
                     if (data != null) {
                         adapter.submitData(lifecycle, data)
-                    }
-                    if (adapter.itemCount != 0) {
+                        binding.rvListVideo.layoutManager = LinearLayoutManager(this@VideoActivity)
+                        binding.rvListVideo.adapter = adapter
                         binding.rvListVideo.visibility = View.VISIBLE
                         binding.tvVideoNullInfo.visibility = View.GONE
                     }

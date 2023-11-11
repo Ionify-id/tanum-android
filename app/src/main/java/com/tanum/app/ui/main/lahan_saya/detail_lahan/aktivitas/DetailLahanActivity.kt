@@ -61,7 +61,6 @@ class DetailLahanActivity : AppCompatActivity() {
                             val area = "${land.area}m²"
                             val dateStart = DateFormatter.formatToFullDateFormat(land.dateStart)
                             val age = calculateAge(land.dateStart)
-                            var profit = 0
                             binding.apply {
                                 textViewNamaLahan.text = land.name
                                 textViewAlamatLahan.text = land.address
@@ -71,9 +70,11 @@ class DetailLahanActivity : AppCompatActivity() {
                                 textViewTanggalTanamValue.text = dateStart
                                 textViewVarietasValue.text = land.varietas
                                 textViewUsiaTanamanValue.text = age
-                                textViewTotalBiayaValue.text = land.totalCost.toString()
-                                if (land.profit > 0) profit = land.profit
-                                textViewKeuntunganValue.text = profit.toString()
+                                val cost = "Rp ${land.totalCost}"
+                                textViewTotalBiayaValue.text = cost
+                                val profit = if (land.profit > 0) land.profit else 0
+                                val profitText = "Rp $profit"
+                                textViewKeuntunganValue.text = profitText
                                 imageViewLahan.setImageResource(getImage(land.image))
                             }
                         }
