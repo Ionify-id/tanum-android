@@ -1,10 +1,13 @@
 package com.tanum.app.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = "activity")
 data class AktivitasData(
 
     @field:SerializedName("createdAt")
@@ -22,6 +25,7 @@ data class AktivitasData(
     @field:SerializedName("action")
     val action: String,
 
+    @PrimaryKey
     @field:SerializedName("id")
     val id: Int,
 

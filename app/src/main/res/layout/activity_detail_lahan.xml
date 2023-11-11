@@ -9,10 +9,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/buttonTambahkanAktivitas">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -296,7 +297,7 @@
         android:textColor="@color/white"
         android:backgroundTint="@color/green_tanum"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginHorizontal="24dp"
         app:icon="@drawable/ic_baseline_add_24"
         app:iconGravity="textStart"

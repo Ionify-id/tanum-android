@@ -29,7 +29,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(BerandaViewModel::class.java) -> BerandaViewModel(userRepository, articleRepository, landRepository) as T
             modelClass.isAssignableFrom(FormLahanViewModel::class.java) -> FormLahanViewModel(userRepository, landRepository) as T
             modelClass.isAssignableFrom(LahanSayaViewModel::class.java) -> LahanSayaViewModel(userRepository, landRepository) as T
-            modelClass.isAssignableFrom(DetailLahanViewModel::class.java) -> DetailLahanViewModel(userRepository, landRepository) as T
+            modelClass.isAssignableFrom(DetailLahanViewModel::class.java) -> DetailLahanViewModel(userRepository, landRepository, activityRepository) as T
             modelClass.isAssignableFrom(FormAktivitasViewModel::class.java) -> FormAktivitasViewModel(userRepository, activityRepository) as T
              else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

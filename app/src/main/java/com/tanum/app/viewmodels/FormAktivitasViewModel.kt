@@ -12,6 +12,11 @@ class FormAktivitasViewModel(
 ): ViewModel() {
     val token: Flow<String> = userRepository.getToken()
 
+    fun getDetailActivity(
+        activityId: Int,
+        token: String
+    ) = activityRepository.getDetailActivity(activityId, token)
+
     fun createActivity(
         landId: Int,
         token: String,

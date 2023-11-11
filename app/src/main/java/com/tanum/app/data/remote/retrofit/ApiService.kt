@@ -122,7 +122,7 @@ interface ApiService {
 
     @GET("activities/detail/{activityId}")
     suspend fun getDetailActivities(
-        @Path("{activityId}") activityId: Int,
+        @Path("activityId") activityId: Int,
         @Header("Authorization") auth: String
     ): DetailAktivitasResponse
 

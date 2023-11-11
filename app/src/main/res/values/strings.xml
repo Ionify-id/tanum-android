@@ -72,6 +72,10 @@
     <string name="success_delete_land">Successfully delete land</string>
     <string name="failed_to_load_lands">Gagal memuat lahan saya</string>
     <string name="failed_to_load_land_detail">Gagal memuat detail lahan</string>
+    <string name="failed_to_delete_activity">Gagal menghapus aktivitas</string>
+    <string name="success_delete_activity">Successfully delete activity</string>
+    <string name="failed_to_load_activity_data">Gagal memuat data aktivitas sebelumnya</string>
+    <string name="activity_edit_success">Successfull edited activity</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

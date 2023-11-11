@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanum.app.R
+import com.tanum.app.adapter.activity.ActivityPagingAdapter
 import com.tanum.app.databinding.ActivityDetailLahanBinding
 import com.tanum.app.ui.main.MainActivity
 import com.tanum.app.ui.main.lahan_saya.detail_lahan.form_aktivitas.FormAktivitasActivity
@@ -41,6 +43,7 @@ class DetailLahanActivity : AppCompatActivity() {
 
     private fun setupView() {
         setupDetailLahanView()
+        setupActivityView()
     }
 
     private fun setupDetailLahanView() {
@@ -58,6 +61,7 @@ class DetailLahanActivity : AppCompatActivity() {
                             val area = "${land.area}m²"
                             val dateStart = DateFormatter.formatToFullDateFormat(land.dateStart)
                             val age = calculateAge(land.dateStart)
+                            var profit = 0
                             binding.apply {
                                 textViewNamaLahan.text = land.name
                                 textViewAlamatLahan.text = land.address
@@ -68,7 +72,8 @@ class DetailLahanActivity : AppCompatActivity() {
                                 textViewVarietasValue.text = land.varietas
                                 textViewUsiaTanamanValue.text = age
                                 textViewTotalBiayaValue.text = land.totalCost.toString()
-                                textViewKeuntunganValue.text = land.profit.toString()
+                                if (land.profit > 0) profit = land.profit
+                                textViewKeuntunganValue.text = profit.toString()
                                 imageViewLahan.setImageResource(getImage(land.image))
                             }
                         }
@@ -76,6 +81,68 @@ class DetailLahanActivity : AppCompatActivity() {
                             Log.d("result", "result loading")
                             showLoading(false)
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupActivityView() {
+        showLoading(false)
+        lifecycleScope.launch {
+            val adapter = ActivityPagingAdapter()
+            val layoutManager = LinearLayoutManager(this@DetailLahanActivity)
+            binding.recyclerViewAktivitas.layoutManager = layoutManager
+            binding.recyclerViewAktivitas.adapter = adapter
+            detailLandViewModel.token.collect { token ->
+                detailLandViewModel.getAllActivities(id, token).observe(this@DetailLahanActivity) { data ->
+                    if (data != null) {
+                        adapter.submitData(lifecycle, data)
+                        binding.recyclerViewAktivitas.post {
+                            binding.recyclerViewAktivitas.scrollToPosition(0)
+                        }
+                        adapter.setOnItemClickCallback(object : ActivityPagingAdapter.OnItemClickCallback{
+                            override fun onItemEditClick(activityId: Int) {
+                                val intent = Intent(this@DetailLahanActivity, FormAktivitasActivity::class.java)
+                                intent.putExtra(FormAktivitasActivity.EXTRA_ACTIVITY_ID, activityId)
+                                startActivity(intent)
+                            }
+
+                            override fun onItemDeleteClick(activityId: Int) {
+                                AlertDialogHelper.showCompleteAlertDialog(
+                                    this@DetailLahanActivity,
+                                    "Hapus aktivitas",
+                                    "Apakah anda yakin ingin menghapus aktivitas?",
+                                    "Yakin",
+                                    "Tidak"
+                                ) {
+                                    showLoading(false)
+                                    lifecycleScope.launch {
+                                        detailLandViewModel.token.collect { token ->
+                                            detailLandViewModel.deleteActivity(activityId, token).observe(this@DetailLahanActivity) { result ->
+                                                if (result != null) {
+                                                    when (result) {
+                                                        is Result.Loading -> {
+                                                            showLoading(true)
+                                                        }
+                                                        is Result.Success -> {
+                                                            showLoading(false)
+                                                            Toast.makeText(this@DetailLahanActivity,
+                                                                getString(R.string.success_delete_activity), Toast.LENGTH_SHORT).show()
+                                                            onResume()
+                                                        }
+                                                        is Result.Error -> {
+                                                            showLoading(false)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        })
                     }
                 }
             }
@@ -97,7 +164,7 @@ class DetailLahanActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.buttonDelete.setOnClickListener {
-            AlertDialogHelper.showCompleteAlertDialog(this@DetailLahanActivity, "Hapus lahan", "Apakah anda yakin ingin menghapus lahan", "Yakin", "Tidak") {
+            AlertDialogHelper.showCompleteAlertDialog(this@DetailLahanActivity, "Hapus lahan", "Apakah anda yakin ingin menghapus lahan?", "Yakin", "Tidak") {
                 lifecycleScope.launch {
                     detailLandViewModel.token.collect { token ->
                         detailLandViewModel.deleteLand(id, token).observe(this@DetailLahanActivity) { result ->
@@ -137,6 +204,7 @@ class DetailLahanActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         setupDetailLahanView()
+        setupActivityView()
     }
 
     companion object {

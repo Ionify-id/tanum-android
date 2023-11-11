@@ -79,6 +79,12 @@ class LahanSayaFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupView()
+        setupAction()
+    }
+
     private fun setupAction() {
         binding.buttonTambahkanLahan.setOnClickListener{
             val intent = Intent(activity, FormLahanActivity::class.java)

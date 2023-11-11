@@ -5,16 +5,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.tanum.app.data.model.LahanData
+import com.tanum.app.data.model.AktivitasData
 
 @Dao
-interface LandDao {
+interface ActivityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLand(land: List<LahanData>)
+    suspend fun insertActivity(activities: List<AktivitasData>)
 
-    @Query("SELECT * FROM land ORDER BY updatedAt DESC")
-    fun getAllLand(): PagingSource<Int, LahanData>
+    @Query("SELECT * FROM activity ORDER BY updatedAt DESC")
+    fun getAllActivity(): PagingSource<Int, AktivitasData>
 
-    @Query("DELETE FROM land")
+    @Query("DELETE FROM activity")
     suspend fun deleteAll()
 }

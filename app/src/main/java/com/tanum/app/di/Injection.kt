@@ -34,6 +34,7 @@ object Injection  {
 
     fun provideActivityRepository(context: Context): ActivityRepository {
         val apiService = RetrofitConfig.getApiService()
-        return ActivityRepository.getInstance(apiService)
+        val database = TanumDatabase.getDatabase(context)
+        return ActivityRepository.getInstance(apiService, database)
     }
 }

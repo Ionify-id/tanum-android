@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.flow
 
 class LandRepository(
     private val apiService: ApiService,
-    private val landDatabase: TanumDatabase
+    private val tanumDatabase: TanumDatabase
 ) {
 
     fun createLand(
@@ -95,10 +95,9 @@ class LandRepository(
                 pageSize = 10,
                 initialLoadSize = 10
             ),
-            remoteMediator = LandRemoteMediator(landDatabase, apiService, "Bearer $token"),
+            remoteMediator = LandRemoteMediator(tanumDatabase, apiService, "Bearer $token"),
             pagingSourceFactory = {
-                landDatabase.landDao().getAllLand()
-//                LandPagingSource(apiService, token)
+                tanumDatabase.landDao().getAllLand()
             }
         ).liveData
     }
@@ -107,19 +106,14 @@ class LandRepository(
         id: Int,
         token: String
     ): Flow<Result<LahanData>> = flow {
-        Log.d("emit result", "loading")
         emit(Result.Loading)
 
         wrapEspressoIdlingResource {
             try {
-                Log.d("request response", "request")
                 val response = apiService.getDetailLand(id, "Bearer $token")
-                Log.d("after request", "request")
                 if (response.meta.code == 200) {
-                    Log.d("emit result", "loading")
                     emit(Result.Success(response.data))
                 } else {
-                    Log.d("emit result", "loading")
                     emit(Result.Error(response.meta.message))
                 }
             } catch (e: Exception) {
