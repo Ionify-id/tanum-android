@@ -7,7 +7,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_tanum">Selamat datang di Tanum!</string>
     <string name="silakan_masuk_untuk_memulai">Silakan masuk untuk memulai.</string>
-    <string name="email_hint">Email</string>
+    <string name="no_hp_hint">No. Handphone</string>
     <string name="password_hint">Kata Sandi</string>
     <string name="masuk">Masuk</string>
     <string name="spannable_string_login">Belum punya akun? Daftar sekarang</string>
@@ -59,23 +59,23 @@
     <string name="total_biaya">Total biaya</string>
     <string name="keuntungan">Keuntungan</string>
     <string name="waktu_kegiatan">Waktu kegiatan</string>
-    <string name="failed">Failed</string>
-    <string name="success">Success</string>
-    <string name="next">Continue</string>
+    <string name="failed">Gagal</string>
+    <string name="success">Berhasil</string>
+    <string name="next">Lanjut</string>
     <string name="required_form">Anda harus mengisi semua form terlebih dahulu</string>
     <string name="register_failed_message">Anda gagal mendaftar.</string>
     <string name="failed_news">Gagal memuat berita</string>
     <string name="failed_video">Gagal memuat video</string>
     <string name="form_need_to_fill">Harap isi semua formulir terlebih dahulu</string>
-    <string name="land_edit_success">Successfully edited land</string>
-    <string name="failed_delete_land">Failed to delete land</string>
-    <string name="success_delete_land">Successfully delete land</string>
+    <string name="land_edit_success">Berhasil mengubah lahan</string>
+    <string name="failed_delete_land">Gagal menghapus lahan</string>
+    <string name="success_delete_land">Berhasil menghapus lahan</string>
     <string name="failed_to_load_lands">Gagal memuat lahan saya</string>
     <string name="failed_to_load_land_detail">Gagal memuat detail lahan</string>
     <string name="failed_to_delete_activity">Gagal menghapus aktivitas</string>
-    <string name="success_delete_activity">Successfully delete activity</string>
+    <string name="success_delete_activity">Berhasil menghapus aktivitas</string>
     <string name="failed_to_load_activity_data">Gagal memuat data aktivitas sebelumnya</string>
-    <string name="activity_edit_success">Successfull edited activity</string>
+    <string name="activity_edit_success">Berhasil mengubah aktivitas</string>
 
     <!--    String array for drop down-->
     <string-array name="role">

@@ -2,6 +2,8 @@ package com.tanum.app.view.main.lahan_saya.detail_lahan.form_aktivitas
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
@@ -18,6 +20,7 @@ import com.tanum.app.utils.AlertDialogHelper
 import com.tanum.app.utils.DateFormatter
 import com.tanum.app.utils.DatePickerHelper
 import com.tanum.app.utils.Result
+import com.tanum.app.utils.formatTigaDigit
 import com.tanum.app.viewmodels.FormAktivitasViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
 import kotlinx.coroutines.launch
@@ -61,6 +64,7 @@ class FormAktivitasActivity : AppCompatActivity() {
                             val activity = result.data
                             binding.apply {
                                 autoCompleteTextViewKategori.setText(activity.category, false)
+                                if (autoCompleteTextViewKategori.text.toString() == "Penjualan") textInputLayoutBiaya.hint = "Pemasukan"
                                 autoCompleteTextViewKegiatan.setText(activity.action, false)
                                 textInputEditTextBiaya.setText(activity.cost.toString())
                                 textInputEditWaktuKegiatan.setText(DateFormatter.formatToFullDateFormat(activity.dateAction))
@@ -79,7 +83,8 @@ class FormAktivitasActivity : AppCompatActivity() {
 
     private fun setupEditAction(activityId: Int) {
         setupDropdown()
-        var dateAction = ""
+        setCostEditText()
+        var dateAction: String
         binding.textInputEditWaktuKegiatan.setOnClickListener {
             DatePickerHelper.showDatePickerDialog(this, null) { selectedDate ->
                 binding.textInputEditWaktuKegiatan.setText(selectedDate)
@@ -96,9 +101,9 @@ class FormAktivitasActivity : AppCompatActivity() {
                     binding.apply {
                         category = autoCompleteTextViewKategori.text.toString()
                         action = autoCompleteTextViewKegiatan.text.toString()
-                        val textCost = textInputEditTextBiaya.text.toString()
+                        val textCost = (textInputEditTextBiaya.text.toString()).replace(".", "")
                         cost = if (textCost.isEmpty()) 0 else textCost.toIntOrNull() ?: 0
-                        dateAction = textInputEditWaktuKegiatan.text.toString()
+                        dateAction = DateFormatter.formatToZFormat(textInputEditWaktuKegiatan.text.toString())
                         activity = AktivitasBody(category, action, cost, dateAction)
                     }
                     if (category.isEmpty() || action.isEmpty() || cost == 0 || dateAction.isEmpty()) {
@@ -139,6 +144,7 @@ class FormAktivitasActivity : AppCompatActivity() {
 
     private fun setupCreateAction(landId: Int) {
         setupDropdown()
+        setCostEditText()
         var dateAction = ""
         binding.textInputEditWaktuKegiatan.setOnClickListener {
             DatePickerHelper.showDatePickerDialog(this, null) { selectedDate ->
@@ -157,7 +163,7 @@ class FormAktivitasActivity : AppCompatActivity() {
                     binding.apply {
                         category = autoCompleteTextViewKategori.text.toString()
                         action = autoCompleteTextViewKegiatan.text.toString()
-                        val textCost = textInputEditTextBiaya.text.toString()
+                        val textCost = (textInputEditTextBiaya.text.toString()).replace(".", "")
                         cost = if (textCost.isEmpty()) 0 else textCost.toIntOrNull() ?: 0
                         activityBody = AktivitasBody(category, action, cost, dateAction)
                     }
@@ -220,7 +226,30 @@ class FormAktivitasActivity : AppCompatActivity() {
             val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item, kegiatan ?: arrayOf())
             binding.autoCompleteTextViewKegiatan.setAdapter(arrayAdapter2)
             binding.autoCompleteTextViewKegiatan.setText("", false)
+
+            if (kategoriValue == "Penjualan") binding.textInputLayoutBiaya.hint = "Pemasukan"
         }
+    }
+
+    private fun setCostEditText() {
+        binding.textInputEditTextBiaya.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                val input = editable.toString()
+                if (input.isNotEmpty()) {
+                    val formatted = input.replace(".", "").formatTigaDigit()
+                    binding.textInputEditTextBiaya.removeTextChangedListener(this)
+                    binding.textInputEditTextBiaya.setText(formatted)
+                    binding.textInputEditTextBiaya.setSelection(formatted.length)
+                    binding.textInputEditTextBiaya.addTextChangedListener(this)
+                }
+            }
+        })
     }
 
     private fun showSuccessDialog(

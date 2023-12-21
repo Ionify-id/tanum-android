@@ -15,7 +15,7 @@ import com.tanum.app.model.data.room.entity.LandRemoteKeys
 
 @Database(
     entities = [LahanData::class, LandRemoteKeys::class, AktivitasData::class, ActivityRemoteKeys::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class TanumDatabase: RoomDatabase() {

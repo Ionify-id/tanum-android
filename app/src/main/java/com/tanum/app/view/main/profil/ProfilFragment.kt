@@ -51,7 +51,7 @@ class ProfilFragment : Fragment() {
             profilViewModel.profile.collect { profile ->
                 binding.apply {
                     tvNamaLengkapUser.text = profile.fullName
-                    tvEmailUser.text = profile.email
+                    tvNoHpUser.text = profile.email
                 }
             }
         }

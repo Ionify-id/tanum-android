@@ -63,6 +63,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
+            android:focusableInTouchMode="false"
             tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +93,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextLayoutEmail"
+        android:id="@+id/editTextLayoutNoHP"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
@@ -101,17 +102,17 @@
         app:boxStrokeColor="@color/green_tanum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/email_hint"
+        android:hint="@string/no_hp_hint"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextLayoutNamaLengkap">
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextNoHP"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +131,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextLayoutEmail">
+        app:layout_constraintTop_toBottomOf="@id/editTextLayoutNoHP">
 
         <EditText
             android:id="@+id/editTextPassword"

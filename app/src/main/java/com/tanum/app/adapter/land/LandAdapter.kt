@@ -20,7 +20,7 @@ class LandAdapter: RecyclerView.Adapter<LandAdapter.LandViewHolder>() {
             binding.apply {
                 val tanaman = "Tanaman: ${data.plant}"
                 val varietas = "Varietas: ${data.varietas}"
-                val luas = "Luas: ${data.area}m²"
+                val luas = "Luas: ${data.area}Ha"
                 val usia = "Usia: ${calculateAge(data.dateStart)}"
                 with(binding) {
                     tvNamaLahan.text = data.name

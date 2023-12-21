@@ -19,6 +19,7 @@ import com.tanum.app.utils.AlertDialogHelper
 import com.tanum.app.utils.DateFormatter
 import com.tanum.app.utils.Result
 import com.tanum.app.utils.calculateAge
+import com.tanum.app.utils.formatTigaDigit
 import com.tanum.app.utils.getImage
 import com.tanum.app.viewmodels.DetailLahanViewModel
 import com.tanum.app.viewmodels.ViewModelFactory
@@ -58,7 +59,7 @@ class DetailLahanActivity : AppCompatActivity() {
                         is Result.Success -> {
                             showLoading(false)
                             val land = result.data
-                            val area = "${land.area}m²"
+                            val area = "${land.area}Ha"
                             val dateStart = DateFormatter.formatToFullDateFormat(land.dateStart)
                             val age = calculateAge(land.dateStart)
                             binding.apply {
@@ -70,10 +71,10 @@ class DetailLahanActivity : AppCompatActivity() {
                                 textViewTanggalTanamValue.text = dateStart
                                 textViewVarietasValue.text = land.varietas
                                 textViewUsiaTanamanValue.text = age
-                                val cost = "Rp ${land.totalCost}"
+                                val cost = "Rp ${land.totalCost.formatTigaDigit()}"
                                 textViewTotalBiayaValue.text = cost
                                 val profit = if (land.profit > 0) land.profit else 0
-                                val profitText = "Rp $profit"
+                                val profitText = "Rp ${profit.formatTigaDigit()}"
                                 textViewKeuntunganValue.text = profitText
                                 imageViewLahan.setImageResource(getImage(land.image))
                             }

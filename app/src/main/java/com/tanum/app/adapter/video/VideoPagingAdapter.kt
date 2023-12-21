@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tanum.app.model.data.VideoData
 import com.tanum.app.databinding.ItemVideoBinding
+import com.tanum.app.utils.extractVideoId
 
 class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoPagingViewHolder>(
     DIFF_CALLBACK
@@ -20,7 +21,7 @@ class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoP
             binding.apply {
                 tvJudulVideo.text = videoData.title
                 val videoId = extractVideoId(videoData.url)
-                val thumbnailUrl = "https://img.youtube.com/vi/$videoId/default.jpg"
+                val thumbnailUrl = "https://img.youtube.com/vi/$videoId/maxresdefault.jpg"
                 Glide.with(itemView.context)
                     .load(thumbnailUrl)
                     .into(ivItemVideo)
@@ -39,12 +40,6 @@ class VideoPagingAdapter: PagingDataAdapter<VideoData, VideoPagingAdapter.VideoP
     override fun onBindViewHolder(holder: VideoPagingViewHolder, position: Int) {
         val data = getItem(position)
         if (data != null) holder.bind(data)
-    }
-
-    private fun extractVideoId(youtubeUrl: String): String {
-        val pattern = "v=([^&]+)".toRegex()
-        val matchResult = pattern.find(youtubeUrl)
-        return matchResult?.groups?.get(1)?.value ?: ""
     }
 
     interface OnItemClickCallback {

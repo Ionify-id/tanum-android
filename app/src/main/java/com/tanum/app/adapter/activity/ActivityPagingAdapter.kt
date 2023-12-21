@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tanum.app.model.data.AktivitasData
 import com.tanum.app.databinding.ItemActivityBinding
 import com.tanum.app.utils.DateFormatter
+import com.tanum.app.utils.formatTigaDigit
 
 class ActivityPagingAdapter: PagingDataAdapter<AktivitasData, ActivityPagingAdapter.ActivityViewHolder>(DIFF_CALLBACK) {
 
@@ -15,7 +16,7 @@ class ActivityPagingAdapter: PagingDataAdapter<AktivitasData, ActivityPagingAdap
 
     inner class ActivityViewHolder(private val binding: ItemActivityBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: AktivitasData) {
-            val cost = "Rp ${data.cost}"
+            val cost = "Rp ${data.cost.formatTigaDigit()}"
             binding.apply {
                 tvTanggal.text = DateFormatter.formatToFullDateFormat(data.dateAction)
                 tvKategoriInfo.text = data.category

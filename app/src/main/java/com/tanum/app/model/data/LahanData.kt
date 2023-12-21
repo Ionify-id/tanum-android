@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 data class LahanData(
 
     @field:SerializedName("area")
-    val area: Int,
+    val area: Float,
 
     @field:SerializedName("image")
     val image: String,

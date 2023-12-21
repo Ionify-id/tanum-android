@@ -45,15 +45,15 @@ class LoginActivity : AppCompatActivity() {
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(it.windowToken, 0)
 
-                    val email = editTextEmail.text.toString()
+                    val noHp = editTextNoHP.text.toString()
                     val password = editTextPassword.text.toString()
 
                     if (
-                        email.isNotEmpty() and
+                        noHp.isNotEmpty() and
                         password.isNotEmpty()
                     ) {
                         loginViewModel
-                            .postLogin(email, password)
+                            .postLogin(noHp, password)
                             .observe(this@LoginActivity) { result ->
                                 if (result != null) {
                                     when (result) {
@@ -92,20 +92,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        binding.buttonLogin.setOnClickListener{
-//            val email = binding.editTextEmail.text.toString()
-//            val password = binding.editTextPassword.text.toString()
-//            if (email.isNotEmpty() and password.isNotEmpty()) {
-//                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            } else {
-//                Toast.makeText(applicationContext,
-//                    getString(R.string.login_alert), Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
     }
 
     private fun setupSpannableString() {

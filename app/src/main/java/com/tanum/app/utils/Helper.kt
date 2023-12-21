@@ -133,3 +133,30 @@ fun getImage(imageId: String): Int {
         else -> 0
     }
 }
+
+fun String.formatTigaDigit(): String {
+    val parts = this.split(".")
+    val angka = parts[0].toInt()
+    val formatted = String.format("%,d", angka).replace(',', '.')
+
+    return if (parts.size > 1) "$formatted.${parts[1]}" else formatted
+}
+
+fun Int.formatTigaDigit(): String {
+    return String.format("%,d", this).replace(',', '.')
+}
+
+fun extractVideoId(link: String): String {
+    val lastIndex = link.length
+    val videoId = if (link.contains("youtube")) {
+        val startIdIndex = lastIndex - 11
+        link.substring(startIdIndex, lastIndex)
+    } else if (link.contains("youtu.be")) {
+        val startIdIndex = 17
+        val lastIdIndex = startIdIndex + 11
+        link.substring(startIdIndex, lastIdIndex)
+    } else {
+        ""
+    }
+    return videoId
+}

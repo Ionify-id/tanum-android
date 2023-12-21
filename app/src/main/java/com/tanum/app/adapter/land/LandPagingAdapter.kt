@@ -20,7 +20,7 @@ class LandPagingAdapter: PagingDataAdapter<LahanData, LandPagingAdapter.LandPagi
         fun bind(data: LahanData) {
             val tanaman = "Tanaman: ${data.plant}"
             val varietas = "Varietas: ${data.varietas}"
-            val luas = "Luas: ${data.area}m²"
+            val luas = "Luas: ${data.area}Ha"
             val usia = "Usia: ${calculateAge(data.dateStart)}"
             with(binding) {
                 tvNamaLahan.text = data.name

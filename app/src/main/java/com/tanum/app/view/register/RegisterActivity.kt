@@ -41,18 +41,18 @@ class RegisterActivity : AppCompatActivity() {
                     imm.hideSoftInputFromWindow(it.windowToken, 0)
 
                     val job = autoCompleteTextViewRole.text.toString()
-                    val email = editTextEmail.text.toString()
+                    val noHP = editTextNoHP.text.toString()
                     val password = editTextPassword.text.toString()
                     val fullName = editTextNamaLengkap.text.toString()
 
                     if (
                         job.isNotEmpty() and
-                        email.isNotEmpty() and
+                        noHP.isNotEmpty() and
                         password.isNotEmpty() and
                         fullName.isNotEmpty()
                     ) {
                         registerViewModel
-                            .postRegister(job, email, password, fullName)
+                            .postRegister(job, noHP, password, fullName)
                             .observe(this@RegisterActivity) { result ->
                                 if (result != null) {
                                     when (result) {

@@ -1,5 +1,6 @@
 package com.tanum.app.adapter.video
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.tanum.app.model.data.VideoData
 import com.tanum.app.databinding.ItemVideoBinding
 import com.tanum.app.utils.VideoDiffCallback
+import com.tanum.app.utils.extractVideoId
 
 class VideoAdapter: RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
@@ -19,7 +21,7 @@ class VideoAdapter: RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
             binding.apply {
                 tvJudulVideo.text = videoData.title
                 val videoId = extractVideoId(videoData.url)
-                val thumbnailUrl = "https://img.youtube.com/vi/$videoId/default.jpg"
+                val thumbnailUrl = "https://img.youtube.com/vi/$videoId/maxresdefault.jpg"
                 Glide.with(itemView.context)
                     .load(thumbnailUrl)
                     .into(ivItemVideo)
@@ -39,12 +41,6 @@ class VideoAdapter: RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         holder.bind(listVideo[position])
-    }
-
-    private fun extractVideoId(youtubeUrl: String): String {
-        val pattern = "v=([^&]+)".toRegex()
-        val matchResult = pattern.find(youtubeUrl)
-        return matchResult?.groups?.get(1)?.value ?: ""
     }
 
     fun setListVideo(listVideo: ArrayList<VideoData>) {

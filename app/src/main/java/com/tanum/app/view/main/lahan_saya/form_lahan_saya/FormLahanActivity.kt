@@ -84,7 +84,7 @@ class FormLahanActivity : AppCompatActivity() {
 
     private fun setupEditAction() {
         setupDropdown()
-        var dateStart = ""
+        var dateStart: String
         binding.textInputEditTanggal.setOnClickListener {
             DatePickerHelper.showDatePickerDialog(this, null) { selectedDate ->
                 binding.textInputEditTanggal.setText(selectedDate)
@@ -97,7 +97,7 @@ class FormLahanActivity : AppCompatActivity() {
                 var landName: String
                 var address: String
                 var ownership: String
-                var area: Int
+                var area: Float
                 var plant: String
                 var varietas: String
                 binding.buttonSimpan.setOnClickListener {
@@ -106,13 +106,17 @@ class FormLahanActivity : AppCompatActivity() {
                         address = textInputEditTextAlamat.text.toString()
                         ownership = autoCompleteTextViewKepemilikan.text.toString()
                         val textArea = textInputEditTextLuas.text.toString()
-                        area = if (textArea.isEmpty()) 0 else textArea.toIntOrNull() ?: 0
+                        area = if (textArea.isEmpty()) {
+                            0.0f
+                        } else {
+                            textArea.toFloatOrNull() ?: 0.0f
+                        }
                         plant = textInputEditTextTanaman.text.toString()
                         varietas = textInputEditTextVarietas.text.toString()
-                        dateStart = textInputEditTanggal.text.toString()
+                        dateStart = DateFormatter.formatToZFormat(textInputEditTanggal.text.toString())
                         land = LahanBody( landName, address, ownership, area, plant, varietas, dateStart, image)
                     }
-                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0 || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
+                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0.0f || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
                         Toast.makeText(this@FormLahanActivity,
                             getString(R.string.form_need_to_fill), Toast.LENGTH_SHORT).show()
                     } else {
@@ -164,7 +168,7 @@ class FormLahanActivity : AppCompatActivity() {
                 var landName: String
                 var address: String
                 var ownership: String
-                var area: Int
+                var area: Float
                 var plant: String
                 var varietas: String
                 binding.buttonSimpan.setOnClickListener {
@@ -173,12 +177,16 @@ class FormLahanActivity : AppCompatActivity() {
                         address = textInputEditTextAlamat.text.toString()
                         ownership = autoCompleteTextViewKepemilikan.text.toString()
                         val textArea = textInputEditTextLuas.text.toString()
-                        area = if (textArea.isEmpty()) 0 else textArea.toIntOrNull() ?: 0
+                        area = if (textArea.isEmpty()) {
+                            0.0f
+                        } else {
+                            textArea.toFloatOrNull() ?: 0.0f
+                        }
                         plant = textInputEditTextTanaman.text.toString()
                         varietas = textInputEditTextVarietas.text.toString()
                         land = LahanBody( landName, address, ownership, area, plant, varietas, dateStart, getRandomNumber())
                     }
-                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0 || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
+                    if ( landName.isEmpty() || address.isEmpty() || ownership.isEmpty() || area == 0.0f || plant.isEmpty() || varietas.isEmpty() || dateStart.isEmpty() ) {
                         Toast.makeText(this@FormLahanActivity,
                             getString(R.string.form_need_to_fill), Toast.LENGTH_SHORT).show()
                     } else {
