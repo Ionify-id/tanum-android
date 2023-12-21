@@ -87,7 +87,8 @@
                 android:id="@+id/editTextNoHP"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="number" />
+                android:inputType="number"
+                android:labelFor="@id/editTextNoHP"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +114,8 @@
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:labelFor="@id/editTextPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

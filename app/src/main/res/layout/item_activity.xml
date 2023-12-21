@@ -16,21 +16,23 @@
     
     <ImageButton
         android:id="@+id/buttonDelete"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/ic_baseline_delete_24"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tvTanggal" />
+        app:layout_constraintBottom_toBottomOf="@id/tvTanggal"
+        android:labelFor="@id/buttonDelete"/>
 
     <ImageButton
         android:id="@+id/buttonEdit"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/ic_baseline_edit_24"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        app:layout_constraintBottom_toBottomOf="@id/tvTanggal" />
+        app:layout_constraintBottom_toBottomOf="@id/tvTanggal"
+        android:labelFor="@id/buttonEdit"/>
 
     <TextView
         android:id="@+id/tvKategori"

@@ -53,6 +53,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:focusableInTouchMode="false"
+            android:labelFor="@id/autoCompleteTextViewKategori"
             tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +82,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:focusableInTouchMode="false"
+            android:labelFor="@id/autoCompleteTextViewKegiatan"
             tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
