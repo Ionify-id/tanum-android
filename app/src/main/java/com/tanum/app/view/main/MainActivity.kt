@@ -1,7 +1,11 @@
 package com.tanum.app.view.main
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -9,16 +13,33 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tanum.app.R
 import com.tanum.app.databinding.ActivityMainBinding
+import com.tanum.app.view.login.LoginActivity
+import com.tanum.app.viewmodels.MainViewModel
+import com.tanum.app.viewmodels.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var factory: ViewModelFactory
+    private val mainViewModel: MainViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        installSplashScreen()
+        factory = ViewModelFactory.getInstance(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setSupportActionBar(binding.toolbar)
+        lifecycleScope.launch {
+            mainViewModel.token.collect { token ->
+                if (token.isEmpty()) {
+                    val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+            }
+        }
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView

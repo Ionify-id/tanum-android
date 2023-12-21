@@ -18,7 +18,6 @@ class ViewModelFactory private constructor(
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(SplashScreenViewModel::class.java) -> SplashScreenViewModel(userRepository) as T
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(userRepository) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(userRepository) as T
             modelClass.isAssignableFrom(ProfilViewModel::class.java) -> ProfilViewModel(userRepository) as T
@@ -31,6 +30,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(LahanSayaViewModel::class.java) -> LahanSayaViewModel(userRepository, landRepository) as T
             modelClass.isAssignableFrom(DetailLahanViewModel::class.java) -> DetailLahanViewModel(userRepository, landRepository, activityRepository) as T
             modelClass.isAssignableFrom(FormAktivitasViewModel::class.java) -> FormAktivitasViewModel(userRepository, activityRepository) as T
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(userRepository) as T
              else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
